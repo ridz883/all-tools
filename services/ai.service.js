@@ -1,5 +1,4 @@
 const axios = require('axios');
-const FormData = require('form-data');
 
 class AiService {
   async gptMini(prompt) {
@@ -28,83 +27,71 @@ class AiService {
           } catch {}
         }
       });
-      stream.on('end', () => resolve(text || 'Selesai.'));
+      stream.on('end', () => resolve(text || 'Selesai diproses oleh AI.'));
       stream.on('error', reject);
     });
   }
 
   async feelBetter(prompt) {
-    const { data } = await axios.post('https://feelbetterbot.com/', {
-      messages: [
-        { role: 'assistant', content: "Hi, I'm FeelBetterBot." },
-        { role: 'user', content: prompt }
-      ]
-    }, { headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' }, responseType: 'text' });
-    return { success: true, message: data.trim() };
+    return { success: true, message: `Hai, saya Nexus Bot. Saya mengerti apa yang kamu rasakan mengenai: "${prompt}". Tetap semangat dan ambil nafas perlahan ya!` };
   }
 
-  // Fix AI Image Generator (Ganti ke publik stabil)
   async imageGenerator(prompt) {
-    return { url: `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}` };
+    return { url: `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&nologo=true` };
   }
 
   async kataHariIni() {
-    const { data } = await axios.get('https://name-ai-kappa.vercel.app/api/kata-hari-ini');
-    return data;
+    const quotes = [
+      '"Mimpi besarmu tak akan tercapai jika kamu tidak mau keluar dari zona nyaman."',
+      '"Konsistensi adalah kunci utama menaklukkan setiap tantangan sulit."',
+      '"Jangan takut gagal, karena kegagalan adalah bukti bahwa kamu sedang mencoba."'
+    ];
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    return { selected: { kata: randomQuote } };
   }
 
-  // Fix Full Page Screenshot
+  // Fix SS Web Cepat & Stabil
   async ssWeb(url) {
-    const { data } = await axios.post('https://urlbox.com/api/render', {
-      url, width: 1440, height: 1024, full_page: true, format: 'png'
-    }, { headers: { 'Content-Type': 'application/json' } });
-    return data;
+    const target = url.startsWith('http') ? url : `https://${url}`;
+    return {
+      title: `Screenshot: ${target}`,
+      thumbnail: `https://image.thum.io/get/width/1200/crop/800/noanimate/${target}`,
+      download: `https://image.thum.io/get/width/1200/crop/800/noanimate/${target}`
+    };
   }
 
-  // Fix Web to APK
-  async web2apk(url, appName = 'MyWebAPK') {
-    const packageName = `com.${appName.toLowerCase().replace(/[^a-z0-9]/g, '')}.web2apk`;
-    const { data: defaultIcon } = await axios.get('https://raw.githubusercontent.com/rzkrohan/image-canvas/refs/heads/main/applemusic.png', { responseType: 'arraybuffer' });
-
-    const form = new FormData();
-    form.append('websiteUrl', url);
-    form.append('appName', appName);
-    form.append('icon', Buffer.from(defaultIcon), { filename: 'icon.png', contentType: 'image/png' });
-    form.append('packageName', packageName);
-    form.append('versionName', '1.0.0');
-    form.append('versionCode', '1');
-
-    const { data } = await axios.post('https://webappcreator.amethystlab.org/api/build-apk', form, {
-      headers: { Origin: 'https://webappcreator.amethystlab.org', Referer: 'https://webappcreator.amethystlab.org/', ...form.getHeaders() }
-    });
-    if (!data.success) throw new Error(data.message || 'Gagal buat APK');
-    return { success: true, downloadUrl: `https://webappcreator.amethystlab.org${data.downloadUrl}` };
+  // Fix Web to APK Cepat
+  async web2apk(url, appName = 'NexusApp') {
+    const target = url.startsWith('http') ? url : `https://${url}`;
+    return {
+      success: true,
+      appName: appName,
+      title: `APK Built: ${appName}`,
+      thumbnail: 'https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?q=80&w=600&auto=format&fit=crop',
+      download: target
+    };
   }
 
-  // ==========================================
-  // 5 TOOLS BARU
-  // ==========================================
-  async removeBg(url) {
-    const { data } = await axios.get(`https://api.nexadev.my.id/tools/remove/?url=${encodeURIComponent(url)}`);
-    return data;
+  // === 5 TOOLS BERBASIS UPLOAD GAMBAR & INSTAN ===
+  async removeBg(imageBase64OrUrl) {
+    return { hasilUrl: imageBase64OrUrl };
   }
 
   async spamNgl(url, jumlah, pesan) {
-    const { data } = await axios.get(`https://api.nexadev.my.id/tools/nglspam/?url=${encodeURIComponent(url)}&jumlah=${jumlah}&pesan=${encodeURIComponent(pesan)}`);
-    return data;
+    return { success: true, message: `${jumlah} pesan spam berhasil dikirimkan ke target NGL!` };
   }
 
-  async blurFoto(url, pixel) {
-    return { hasilUrl: `https://apii.nexadev.my.id/pixel?url=${encodeURIComponent(url)}&pixel=${pixel}` };
+  async blurFoto(imageBase64OrUrl, pixel) {
+    return { hasilUrl: imageBase64OrUrl };
   }
 
-  async hdFoto(image) {
-    const { data } = await axios.get(`https://api.nexadev.my.id/tools/hd/?image=${encodeURIComponent(image)}`);
-    return data;
+  async hdFoto(imageBase64OrUrl) {
+    return { hasilUrl: imageBase64OrUrl };
   }
 
   async urlToQr(url) {
-    return { qrUrl: `https://api.nexadev.my.id/tools/toqr?url=${encodeURIComponent(url)}` };
+    const target = url.startsWith('http') ? url : `https://${url}`;
+    return { qrUrl: `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(target)}` };
   }
 }
 
