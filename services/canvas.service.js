@@ -2,7 +2,7 @@ const { createCanvas, loadImage } = require('@napi-rs/canvas');
 const axios = require('axios');
 
 class CanvasService {
-  // Fix Apple Music
+  // 1. Fake Apple Music
   async fakeAppleMusic(title = 'Beauty and a beat', artist = 'Justin Bieber') {
     const canvas = createCanvas(1080, 1920);
     const ctx = canvas.getContext('2d');
@@ -37,7 +37,7 @@ class CanvasService {
     return canvas.toDataURL('image/png');
   }
 
-  // Fix FF Fake
+  // 2. Fake FF Lobby Maker (Teks Nama Diperjelas)
   async fakeFf(nama = 'RIDZ.GAKJAGO') {
     const BG_WIDTH = 1200, BG_HEIGHT = 2135;
     const canvas = createCanvas(BG_WIDTH, BG_HEIGHT);
@@ -46,41 +46,44 @@ class CanvasService {
     const bgImage = await loadImage('https://raw.githubusercontent.com/rzkrohan/epep-cowo/refs/heads/main/cowo2.webp');
     ctx.drawImage(bgImage, 0, 0, BG_WIDTH, BG_HEIGHT);
 
-    const centerX = 600.0, centerY = 1670.08 + (58.9 / 2);
+    const centerX = 600.0, centerY = 350.0;
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'center';
-    ctx.font = 'bold 50px sans-serif';
+    ctx.font = 'bold 70px sans-serif';
 
-    ctx.lineWidth = 6;
-    ctx.strokeStyle = '#3D2400';
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = '#000000';
     ctx.strokeText(nama, centerX, centerY);
 
-    const gradient = ctx.createLinearGradient(centerX - 250, centerY - 30, centerX - 250, centerY + 30);
-    gradient.addColorStop(0, '#FFF3B0');
-    gradient.addColorStop(0.5, '#FFD182');
-    gradient.addColorStop(1, '#C98A1F');
-
-    ctx.fillStyle = gradient;
+    ctx.fillStyle = '#FFD700';
     ctx.fillText(nama, centerX, centerY);
 
     return canvas.toDataURL('image/png');
   }
 
-  // Fake Tulis Buku
+  // 3. Fake Tulis Buku (Fix Tulisan Muncul Jelas di Kertas)
   async fakeTulis(text = 'Contoh tulisan tangan...') {
     const canvas = createCanvas(1080, 1920);
     const ctx = canvas.getContext('2d');
 
-    const { data } = await axios.get('https://raw.githubusercontent.com/rzkrohanmedia/cloud-backup/main/uploads/KyzoCDN_1784739409872_undefined.png', { responseType: 'arraybuffer' });
-    const bg = await loadImage(Buffer.from(data));
-    ctx.drawImage(bg, 0, 0, 1080, 1920);
+    ctx.fillStyle = '#fcfbf7';
+    ctx.fillRect(0, 0, 1080, 1920);
 
-    ctx.font = '36px sans-serif';
-    ctx.fillStyle = '#444444';
+    ctx.strokeStyle = '#cbd5e1';
+    ctx.lineWidth = 2;
+    for (let i = 200; i < 1800; i += 60) {
+      ctx.beginPath();
+      ctx.moveTo(100, i);
+      ctx.lineTo(980, i);
+      ctx.stroke();
+    }
+
+    ctx.font = '40px sans-serif';
+    ctx.fillStyle = '#1e293b';
     ctx.textAlign = 'left';
     ctx.textBaseline = 'top';
 
-    let x = 150, y = 286, maxWidth = 785, lineHeight = 46;
+    let x = 130, y = 210, maxWidth = 800, lineHeight = 60;
     const paragraphs = String(text).split('\n');
 
     for (const paragraph of paragraphs) {
@@ -105,7 +108,7 @@ class CanvasService {
     return canvas.toDataURL('image/png');
   }
 
-  // Fix Windows Player
+  // 4. Windows Player Maker
   async fakeWindows(text = 'ANJAY BANGWT KIR') {
     const canvas = createCanvas(1080, 1920);
     const ctx = canvas.getContext('2d');
@@ -117,15 +120,15 @@ class CanvasService {
     const img = await loadImage(Buffer.from(imgBuf));
     ctx.drawImage(img, 0, 0, 1080, 1920);
 
-    ctx.font = 'bold 55px Arial';
-    ctx.fillStyle = '#000000';
+    ctx.font = 'bold 60px sans-serif';
+    ctx.fillStyle = '#0f172a';
     ctx.textAlign = 'left';
     ctx.textBaseline = 'top';
 
     const lines = text.trim().split(/\s+/);
-    let startY = 729.15;
+    let startY = 720.0;
     lines.forEach((line, i) => {
-      ctx.fillText(line, 45.0, startY + (i * 65));
+      ctx.fillText(line, 80.0, startY + (i * 75));
     });
 
     return canvas.toDataURL('image/png');
