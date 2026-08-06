@@ -2,7 +2,7 @@ const { createCanvas, loadImage } = require('@napi-rs/canvas');
 const axios = require('axios');
 
 class CanvasService {
-  // 13. Fake Apple Music
+  // Fix Apple Music
   async fakeAppleMusic(title = 'Beauty and a beat', artist = 'Justin Bieber') {
     const canvas = createCanvas(1080, 1920);
     const ctx = canvas.getContext('2d');
@@ -27,17 +27,17 @@ class CanvasService {
     ctx.restore();
 
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 42px sans-serif';
-    ctx.fillText(title, 100, 1206);
+    ctx.font = 'bold 45px sans-serif';
+    ctx.fillText(title, 100, 1206, 880);
 
     ctx.fillStyle = '#BEBEBE';
-    ctx.font = '32px sans-serif';
-    ctx.fillText(artist, 100, 1272);
+    ctx.font = '35px sans-serif';
+    ctx.fillText(artist, 100, 1272, 880);
 
     return canvas.toDataURL('image/png');
   }
 
-  // 14. Fake FF Satpam Lobby
+  // Fix FF Fake
   async fakeFf(nama = 'RIDZ.GAKJAGO') {
     const BG_WIDTH = 1200, BG_HEIGHT = 2135;
     const canvas = createCanvas(BG_WIDTH, BG_HEIGHT);
@@ -66,8 +66,8 @@ class CanvasService {
     return canvas.toDataURL('image/png');
   }
 
-  // 15. Fake Tulis Buku
-  async fakeTulis(text = 'Contoh tulisan tangan otomatis...') {
+  // Fake Tulis Buku
+  async fakeTulis(text = 'Contoh tulisan tangan...') {
     const canvas = createCanvas(1080, 1920);
     const ctx = canvas.getContext('2d');
 
@@ -105,7 +105,7 @@ class CanvasService {
     return canvas.toDataURL('image/png');
   }
 
-  // 16. Windows Media Player Maker
+  // Fix Windows Player
   async fakeWindows(text = 'ANJAY BANGWT KIR') {
     const canvas = createCanvas(1080, 1920);
     const ctx = canvas.getContext('2d');
