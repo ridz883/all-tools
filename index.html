@@ -3,126 +3,345 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MultiTool.io - 21 All-in-One Tools</title>
+  <title>All Tools Nexus - 21 Integrated Tools</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Font: Orbitron & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    body { background-color: #020617; color: #f8fafc; font-family: sans-serif; }
-    .hidden-view { display: none !important; }
+    /* ========================================================
+       NEXUS THEME CSS VARIABLES (DYNAMIC COLOR THEMES)
+    ======================================================== */
+    :root, [data-theme="purple"] {
+      --accent: #a855f7;
+      --accent-hover: #9333ea;
+      --accent-glow: rgba(168, 85, 247, 0.25);
+      --accent-subtle: rgba(168, 85, 247, 0.12);
+      --accent-border: rgba(168, 85, 247, 0.35);
+      --accent-grad-from: #c084fc;
+      --accent-grad-to: #7e22ce;
+    }
+    [data-theme="cyan"] {
+      --accent: #06b6d4;
+      --accent-hover: #0891b2;
+      --accent-glow: rgba(6, 182, 212, 0.25);
+      --accent-subtle: rgba(6, 182, 212, 0.12);
+      --accent-border: rgba(6, 182, 212, 0.35);
+      --accent-grad-from: #22d3ee;
+      --accent-grad-to: #0e7490;
+    }
+    [data-theme="emerald"] {
+      --accent: #10b981;
+      --accent-hover: #059669;
+      --accent-glow: rgba(16, 185, 129, 0.25);
+      --accent-subtle: rgba(16, 185, 129, 0.12);
+      --accent-border: rgba(16, 185, 129, 0.35);
+      --accent-grad-from: #34d399;
+      --accent-grad-to: #047857;
+    }
+    [data-theme="rose"] {
+      --accent: #f43f5e;
+      --accent-hover: #e11d48;
+      --accent-glow: rgba(244, 63, 94, 0.25);
+      --accent-subtle: rgba(244, 63, 94, 0.12);
+      --accent-border: rgba(244, 63, 94, 0.35);
+      --accent-grad-from: #fb7185;
+      --accent-grad-to: #be123c;
+    }
+    [data-theme="amber"] {
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-glow: rgba(245, 158, 11, 0.25);
+      --accent-subtle: rgba(245, 158, 11, 0.12);
+      --accent-border: rgba(245, 158, 11, 0.35);
+      --accent-grad-from: #fbbf24;
+      --accent-grad-to: #b45309;
+    }
+
+    /* GLOBAL STYLES */
+    body {
+      background-color: #030712;
+      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-nexus {
+      font-family: 'Orbitron', sans-serif;
+    }
+    .hidden-view {
+      display: none !important;
+    }
+
+    /* THEME-DEPENDENT CLASSES */
+    .nexus-border { border-color: var(--accent-border); }
+    .nexus-border-subtle { border-color: rgba(255,255,255,0.08); }
+    .nexus-bg-subtle { background-color: var(--accent-subtle); }
+    .nexus-text { color: var(--accent); }
+    .nexus-glow { box-shadow: 0 0 25px var(--accent-glow); }
+    .nexus-btn {
+      background: linear-gradient(135deg, var(--accent-grad-from), var(--accent-grad-to));
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+    .nexus-btn:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 6px 20px var(--accent-glow);
+    }
+    .nexus-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--accent-border);
+    }
+    .nexus-card-subtle {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .nexus-tab-active {
+      background: linear-gradient(135deg, var(--accent-grad-from), var(--accent-grad-to));
+      color: #ffffff;
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
   </style>
 </head>
-<body class="min-h-screen bg-slate-950 text-slate-100 selection:bg-blue-500 selection:text-white">
+<body class="min-h-screen bg-[#030712] text-slate-100 selection:bg-purple-500 selection:text-white">
 
-  <!-- Top Navigation -->
-  <header class="border-b border-slate-800/80 bg-slate-950/70 backdrop-blur-md sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <div onclick="backToDashboard()" class="flex items-center gap-2.5 cursor-pointer">
-        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold shadow-lg shadow-blue-500/20">
-          <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
+  <!-- ========================================================
+       TOP NAVBAR & THEME SWITCHER
+  ======================================================== -->
+  <header class="border-b border-slate-800/80 bg-[#030712]/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      
+      <!-- Logo Nexus -->
+      <div onclick="backToDashboard()" class="flex items-center gap-3 cursor-pointer group">
+        <div class="w-9 h-9 rounded-xl nexus-btn flex items-center justify-center font-bold">
+          <i data-lucide="zap" class="w-5 h-5 text-white"></i>
         </div>
-        <span class="font-bold text-lg tracking-tight">MultiTool<span class="text-blue-500">.io</span></span>
+        <div>
+          <span class="font-nexus font-bold text-lg tracking-wider block leading-none">
+            ALL TOOLS <span class="nexus-text">NEXUS</span>
+          </span>
+          <span class="text-[10px] text-slate-400 font-medium tracking-widest uppercase">
+            SECURE ASSET BRIDGE
+          </span>
+        </div>
       </div>
-      <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-400">
-        21 Tools Integrated
-      </span>
+
+      <!-- Theme Switcher & Status Pill -->
+      <div class="flex items-center gap-3">
+        <!-- Palette Switcher -->
+        <div class="flex items-center gap-1.5 bg-slate-900/90 border border-slate-800 p-1.5 rounded-full shadow-lg">
+          <button onclick="setTheme('purple')" title="Nexus Purple" class="w-5 h-5 rounded-full bg-purple-500 hover:scale-110 transition-transform cursor-pointer"></button>
+          <button onclick="setTheme('cyan')" title="Cyber Cyan" class="w-5 h-5 rounded-full bg-cyan-400 hover:scale-110 transition-transform cursor-pointer"></button>
+          <button onclick="setTheme('emerald')" title="Matrix Emerald" class="w-5 h-5 rounded-full bg-emerald-500 hover:scale-110 transition-transform cursor-pointer"></button>
+          <button onclick="setTheme('rose')" title="Crimson Rose" class="w-5 h-5 rounded-full bg-rose-500 hover:scale-110 transition-transform cursor-pointer"></button>
+          <button onclick="setTheme('amber')" title="Solar Gold" class="w-5 h-5 rounded-full bg-amber-500 hover:scale-110 transition-transform cursor-pointer"></button>
+        </div>
+
+        <!-- Status Pill -->
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>ONLINE • v2.4</span>
+        </div>
+      </div>
+
     </div>
   </header>
 
-  <!-- Main Content -->
-  <main class="max-w-6xl mx-auto px-6 py-10">
+  <!-- ========================================================
+       MAIN CONTENT WRAPPER
+  ======================================================== -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
     
-    <!-- VIEW 1: DASHBOARD UTAMA -->
-    <div id="dashboardView" class="space-y-10">
-      <div class="text-center max-w-2xl mx-auto space-y-4">
-        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">
-          Koleksi Web Tools & AI <br />
-          <span class="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
-            Cepat, Modern & Praktis
-          </span>
-        </h1>
-        <p class="text-slate-400 text-sm sm:text-base">
-          Dari Downloader Sosial Media, Generator AI, hingga Pembuat Gambar Canvas custom dalam satu dashboard.
-        </p>
+    <!-- === VIEW 1: DASHBOARD UTAMA NEXUS === -->
+    <div id="dashboardView" class="space-y-8 animate-in fade-in duration-300">
+      
+      <!-- HERO & TELEMETRY BANNER -->
+      <div class="nexus-card rounded-3xl p-6 sm:p-8 relative overflow-hidden nexus-glow">
+        <!-- Background decorative glow -->
+        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full nexus-bg-subtle blur-3xl pointer-events-none"></div>
+        
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full nexus-bg-subtle nexus-border text-xs font-semibold nexus-text uppercase tracking-wider">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> All-in-One MultiTool Core
+            </div>
+            <h1 class="font-nexus text-3xl sm:text-4xl font-bold tracking-tight text-white">
+              NEXUS <span class="nexus-text">INTEGRATED</span> TOOLS
+            </h1>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+              Platform ekosistem 21 fitur downloader sosial media, artificial intelligence, dan generator gambar canvas dalam satu antarmuka terenkripsi.
+            </p>
+          </div>
 
-        <!-- Search Bar -->
-        <div class="relative pt-2">
-          <i data-lucide="search" class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
-          <input
-            id="searchInput"
-            type="text"
-            placeholder="Cari tool (contoh: tiktok, remove bg, apple music, ngl spam)..."
-            class="w-full bg-slate-900/90 border border-slate-800 rounded-2xl pl-12 pr-4 py-3.5 text-sm focus:outline-none focus:border-blue-500 transition-all placeholder:text-slate-500 shadow-xl"
-          />
+          <!-- Telemetry Device Info Pill Box -->
+          <div class="bg-slate-950/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 min-w-[240px] text-xs">
+            <div class="flex items-center justify-between text-slate-400">
+              <span>NEGARA</span>
+              <span class="text-slate-200 font-semibold flex items-center gap-1.5">
+                🇮🇩 Indonesia
+              </span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>SYSTEM STATUS</span>
+              <span class="text-emerald-400 font-semibold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> 99.9% Uptime
+              </span>
+            </div>
+            <div class="flex items-center justify-between text-slate-400">
+              <span>ROLE ACCESS</span>
+              <span class="nexus-text font-semibold uppercase tracking-wider">VVIP / DEV</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Bar in Hero -->
+        <div class="mt-6 pt-6 border-t border-slate-800/80">
+          <div class="relative">
+            <i data-lucide="search" class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="Cari tool Nexus (contoh: tiktok, remove bg, apple music, ngl spam, free fire)..."
+              class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl pl-12 pr-4 py-3.5 text-sm focus:outline-none nexus-border transition-all placeholder:text-slate-500 text-slate-100 shadow-xl"
+            />
+          </div>
         </div>
       </div>
 
-      <!-- Filter Kategori -->
+      <!-- FILTER KATEGORI TABS -->
       <div id="categoryContainer" class="flex items-center justify-center gap-2 flex-wrap"></div>
 
-      <!-- Grid Katalog -->
+      <!-- GRID KATALOG TOOLS -->
       <div id="toolsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
     </div>
 
-    <!-- VIEW 2: HALAMAN KHUSUS PER-TOOL -->
-    <div id="toolWorkspaceView" class="max-w-2xl mx-auto space-y-6 hidden-view">
-      <button
-        onclick="backToDashboard()"
-        class="inline-flex items-center gap-2 text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-900 border border-slate-800 px-3.5 py-2 rounded-xl transition-all cursor-pointer hover:border-slate-700"
-      >
-        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Kembali ke Daftar
-      </button>
+    <!-- === VIEW 2: WORKSPACE PER-TOOL (NEXUS ROOM) === -->
+    <div id="toolWorkspaceView" class="max-w-3xl mx-auto space-y-6 hidden-view">
+      
+      <!-- Nav Back Bar -->
+      <div class="flex items-center justify-between">
+        <button
+          onclick="backToDashboard()"
+          class="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white bg-slate-900 border border-slate-800 px-4 py-2.5 rounded-xl transition-all cursor-pointer hover:border-slate-700"
+        >
+          <i data-lucide="arrow-left" class="w-4 h-4"></i> All Tools Nexus
+        </button>
+        <span id="toolHeaderPath" class="font-nexus text-xs tracking-widest text-slate-400 uppercase">
+          TOOL ROOM // SECURE BRIDGE
+        </span>
+      </div>
 
-      <!-- Tool Workspace Card -->
-      <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-        <div class="space-y-1">
-          <span id="toolCategoryBadge" class="text-xs font-semibold text-blue-400 uppercase tracking-wider"></span>
-          <h2 id="toolTitle" class="text-2xl font-bold"></h2>
-          <p id="toolDesc" class="text-slate-400 text-sm"></p>
+      <!-- STATUS & TELEMETRY BOX -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="nexus-card-subtle rounded-2xl p-3.5 flex items-center gap-3">
+          <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
+          <div>
+            <span class="block text-[10px] text-slate-400 uppercase font-semibold">STATUS SERVER</span>
+            <span class="text-xs font-bold text-slate-200">Online — 99.9%</span>
+          </div>
+        </div>
+        <div class="nexus-card-subtle rounded-2xl p-3.5 flex items-center gap-3">
+          <i data-lucide="cpu" class="w-5 h-5 nexus-text"></i>
+          <div>
+            <span class="block text-[10px] text-slate-400 uppercase font-semibold">ENGINE ROUTE</span>
+            <span class="text-xs font-bold text-slate-200">Nexus CDN v2.4</span>
+          </div>
+        </div>
+        <div class="nexus-card-subtle rounded-2xl p-3.5 flex items-center gap-3">
+          <i data-lucide="lock" class="w-5 h-5 nexus-text"></i>
+          <div>
+            <span class="block text-[10px] text-slate-400 uppercase font-semibold">SECURITY LAYER</span>
+            <span class="text-xs font-bold text-slate-200">Encrypted Bridge</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN TOOL WORKSPACE CARD -->
+      <div class="nexus-card rounded-3xl p-6 sm:p-8 space-y-6 nexus-glow">
+        <!-- Title Header -->
+        <div class="flex items-start justify-between border-b border-slate-800/80 pb-5">
+          <div class="space-y-1">
+            <span id="toolCategoryBadge" class="text-xs font-bold nexus-text uppercase tracking-widest"></span>
+            <h2 id="toolTitle" class="font-nexus text-2xl sm:text-3xl font-bold text-white tracking-wide"></h2>
+            <p id="toolDesc" class="text-slate-400 text-sm"></p>
+          </div>
+          <div id="toolIconBadge" class="w-12 h-12 rounded-2xl nexus-bg-subtle nexus-border flex items-center justify-center shrink-0">
+            <i data-lucide="zap" class="w-6 h-6 nexus-text"></i>
+          </div>
         </div>
 
-        <!-- Form Input -->
+        <!-- FORM INPUT DYNAMIC -->
         <form id="toolForm" class="space-y-4" onsubmit="handleProcess(event)">
           <div id="formInputArea"></div>
         </form>
 
-        <!-- Area Hasil -->
-        <div id="toolResultArea" class="pt-6 border-t border-slate-800/80 hidden-view"></div>
+        <!-- PREVIEW / RESULT CONTAINER -->
+        <div id="toolResultContainer" class="pt-2">
+          <!-- Empty State (Sebelum Eksekusi) -->
+          <div id="emptyPreviewState" class="nexus-card-subtle rounded-2xl p-8 text-center space-y-3 border-dashed border-slate-800">
+            <div class="w-14 h-14 rounded-2xl nexus-bg-subtle flex items-center justify-center mx-auto">
+              <i data-lucide="layers" class="w-7 h-7 nexus-text"></i>
+            </div>
+            <div>
+              <h4 class="text-sm font-semibold text-slate-300">Belum Ada Preview</h4>
+              <p class="text-xs text-slate-500 mt-1">Masukkan data atau tautan pada kolom di atas lalu tekan tombol proses.</p>
+            </div>
+          </div>
+
+          <!-- Active Result Area (Setelah Eksekusi) -->
+          <div id="toolResultArea" class="hidden-view"></div>
+        </div>
       </div>
+
     </div>
 
   </main>
 
+  <!-- ========================================================
+       JAVASCRIPT LOGIC & 21 TOOLS INTEGRATION
+  ======================================================== -->
   <script>
-    // === KATALOG 21 TOOLS (LENGKAP) ===
+    // === 1. TEMA WARNA SWITCHER ===
+    function setTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      localStorage.setItem('nexus_theme', themeName);
+    }
+
+    // Load saved theme on load
+    const savedTheme = localStorage.getItem('nexus_theme') || 'purple';
+    setTheme(savedTheme);
+
+    // === 2. KATALOG 21 TOOLS (LENGKAP TANPA ADA YANG DIHAPUS) ===
     const TOOLS_CATALOG = [
       // --- DOWNLOADERS ---
-      { id: 'tiktok-dl', name: 'TikTok Downloader', category: 'Downloader', desc: 'Download video TikTok & slide foto tanpa watermark (HD).', icon: 'video', color: 'from-pink-500 to-rose-500', inputType: 'url', placeholder: 'https://vt.tiktok.com/...' },
-      { id: 'ig-dl', name: 'Instagram Downloader', category: 'Downloader', desc: 'Unduh Reels, Postingan foto, dan Carousel Instagram.', icon: 'camera', color: 'from-purple-500 to-pink-500', inputType: 'url', placeholder: 'https://www.instagram.com/reel/...' },
-      { id: 'pin-dl', name: 'Pinterest Downloader', category: 'Downloader', desc: 'Unduh foto resolusi tinggi & Carousel dari Pinterest.', icon: 'image', color: 'from-red-600 to-rose-600', inputType: 'url', placeholder: 'https://pin.it/...' },
-      { id: 'yt-mp4', name: 'YouTube Video (Multi Resolusi)', category: 'Downloader', desc: 'Download video YouTube dengan pilihan resolusi SD hingga HD.', icon: 'video', color: 'from-red-500 to-orange-500', inputType: 'url', placeholder: 'https://youtu.be/...' },
-      { id: 'yt-mp3', name: 'YouTube Audio (MP3)', category: 'Downloader', desc: 'Konversi dan unduh audio MP3 jernih (128kbps/320kbps).', icon: 'music', color: 'from-amber-500 to-red-500', inputType: 'url', placeholder: 'https://youtu.be/...' },
-      { id: 'spotify-dl', name: 'Spotify Downloader', category: 'Downloader', desc: 'Unduh lagu MP3 dari Spotify beserta cover album & metadata.', icon: 'music', color: 'from-emerald-500 to-green-600', inputType: 'url', placeholder: 'https://open.spotify.com/track/...' },
+      { id: 'tiktok-dl', name: 'TikTok Downloader', category: 'Downloader', desc: 'Download video TikTok & slide foto tanpa watermark (HD).', icon: 'video', badge: 'MP4/MP3/JPG', inputType: 'url', placeholder: 'Tempel link TikTok di sini (https://vt.tiktok.com/...)' },
+      { id: 'ig-dl', name: 'Instagram Downloader', category: 'Downloader', desc: 'Unduh Reels, Postingan foto, dan Carousel Instagram resolusi HD.', icon: 'camera', badge: 'HD REELS', inputType: 'url', placeholder: 'Tempel link Instagram di sini (https://www.instagram.com/reel/...)' },
+      { id: 'pin-dl', name: 'Pinterest Downloader', category: 'Downloader', desc: 'Unduh foto resolusi tinggi & Carousel media dari Pinterest.', icon: 'image', badge: 'IMAGE/HD', inputType: 'url', placeholder: 'Tempel link Pinterest di sini (https://pin.it/...)' },
+      { id: 'yt-mp4', name: 'YouTube Video (Multi-Res)', category: 'Downloader', desc: 'Download video YouTube dengan pilihan resolusi SD hingga HD 1080p.', icon: 'video', badge: 'MP4 HD', inputType: 'url', placeholder: 'Tempel link YouTube di sini (https://youtu.be/...)' },
+      { id: 'yt-mp3', name: 'YouTube Audio (MP3)', category: 'Downloader', desc: 'Konversi dan unduh audio MP3 jernih (128kbps/320kbps).', icon: 'music', badge: 'MP3 AUDIO', inputType: 'url', placeholder: 'Tempel link YouTube di sini (https://youtu.be/...)' },
+      { id: 'spotify-dl', name: 'Spotify Downloader', category: 'Downloader', desc: 'Unduh lagu MP3 dari Spotify beserta cover album & metadata asli.', icon: 'music', badge: 'SPOTIFY MP3', inputType: 'url', placeholder: 'Tempel link Spotify track di sini (https://open.spotify.com/track/...)' },
       
-      // --- AI & GENERAL TOOLS (TERMASUK 5 TOOLS BARU) ---
-      { id: 'gpt-mini', name: 'GPT-5.4 Mini AI', category: 'AI & Tools', desc: 'Chat cerdas dengan AI model terbaru tanpa perlu login.', icon: 'sparkles', color: 'from-blue-500 to-cyan-500', inputType: 'chat', placeholder: 'Tanyakan apa saja kepada AI...' },
-      { id: 'ai-img', name: 'AI Image Generator', category: 'AI & Tools', desc: 'Ubah teks prompt menjadi karya seni gambar berkualitas tinggi.', icon: 'palette', color: 'from-violet-500 to-purple-600', inputType: 'prompt', placeholder: 'Contoh: A futuristic cyberpunk city at rainy night, 4k...' },
-      { id: 'bot-feelbetter', name: 'FeelBetter AI Bot', category: 'AI & Tools', desc: 'Teman cerita AI yang siap mendengarkan dan memberi saran penenang.', icon: 'message-square', color: 'from-teal-500 to-emerald-500', inputType: 'chat', placeholder: 'Bagaimana perasaanmu hari ini? Ceritakan...' },
-      { id: 'web2apk', name: 'Web to APK Builder', category: 'AI & Tools', desc: 'Konversi website apapun menjadi aplikasi Android (.APK) instan.', icon: 'smartphone', color: 'from-indigo-500 to-blue-600', inputType: 'url', placeholder: 'https://website-kamu.com' },
-      { id: 'ss-web', name: 'FullPage Web Screenshot', category: 'AI & Tools', desc: 'Ambil tangkapan layar (screenshot) halaman web secara penuh dari atas ke bawah.', icon: 'terminal', color: 'from-cyan-500 to-blue-500', inputType: 'url', placeholder: 'https://example.com' },
-      { id: 'quotes-today', name: 'Kata-Kata Hari Ini', category: 'AI & Tools', desc: 'Dapatkan kutipan & kata-kata motivasi harian penambah semangat.', icon: 'quote', color: 'from-yellow-500 to-amber-600', inputType: 'button-only' },
-      { id: 'remove-bg', name: 'Remove Background', category: 'AI & Tools', desc: 'Hapus latar belakang foto secara otomatis dan bersih.', icon: 'image', color: 'from-pink-600 to-purple-600', inputType: 'url', placeholder: 'Tempel URL Gambar di sini...' },
-      { id: 'ngl-spam', name: 'NGL Spam Bot', category: 'AI & Tools', desc: 'Kirim pesan anonim NGL otomatis secara massal.', icon: 'terminal', color: 'from-red-500 to-pink-500', inputType: 'ngl-form', placeholder: 'URL NGL' },
-      { id: 'blur-foto', name: 'Blur Foto Effect', category: 'AI & Tools', desc: 'Berikan efek blur kustom pada gambar online.', icon: 'palette', color: 'from-blue-500 to-teal-500', inputType: 'blur-form', placeholder: 'URL Gambar' },
-      { id: 'hd-foto', name: 'HD Photo Enhancer', category: 'AI & Tools', desc: 'Tingkatkan kualitas kejernihan foto secara instan.', icon: 'sparkles', color: 'from-amber-500 to-yellow-500', inputType: 'url', placeholder: 'Tempel URL Gambar di sini...' },
-      { id: 'url-to-qr', name: 'URL to QR Code', category: 'AI & Tools', desc: 'Ubah tautan web menjadi QR Code resolusi tinggi.', icon: 'terminal', color: 'from-indigo-500 to-purple-500', inputType: 'url', placeholder: 'https://...' },
+      // --- AI & GENERAL TOOLS ---
+      { id: 'gpt-mini', name: 'GPT-5.4 Mini AI', category: 'AI & Tools', desc: 'Chat cerdas dengan AI model terbaru tanpa perlu login.', icon: 'sparkles', badge: 'AI CHAT', inputType: 'chat', placeholder: 'Tanyakan apa saja kepada Nexus AI...' },
+      { id: 'ai-img', name: 'AI Image Generator', category: 'AI & Tools', desc: 'Ubah teks prompt menjadi karya seni gambar berkualitas tinggi.', icon: 'palette', badge: 'AI ART', inputType: 'prompt', placeholder: 'Contoh prompt: A futuristic cyberpunk city at rainy night, 4k...' },
+      { id: 'bot-feelbetter', name: 'FeelBetter AI Bot', category: 'AI & Tools', desc: 'Teman cerita AI yang siap mendengarkan dan memberi saran penenang.', icon: 'message-square', badge: 'AI BOT', inputType: 'chat', placeholder: 'Bagaimana perasaanmu hari ini? Ceritakan...' },
+      { id: 'web2apk', name: 'Web to APK Builder', category: 'AI & Tools', desc: 'Konversi website apapun menjadi aplikasi Android (.APK) instan.', icon: 'smartphone', badge: 'APK BUILD', inputType: 'url', placeholder: 'https://website-kamu.com' },
+      { id: 'ss-web', name: 'FullPage Web Screenshot', category: 'AI & Tools', desc: 'Ambil tangkapan layar (screenshot) halaman web secara penuh dari atas ke bawah.', icon: 'terminal', badge: 'FULL SS', inputType: 'url', placeholder: 'https://example.com' },
+      { id: 'quotes-today', name: 'Kata-Kata Hari Ini', category: 'AI & Tools', desc: 'Dapatkan kutipan & kata-kata motivasi harian penambah semangat.', icon: 'quote', badge: 'MOTIVATION', inputType: 'button-only' },
+      { id: 'remove-bg', name: 'Remove Background', category: 'AI & Tools', desc: 'Hapus latar belakang foto secara otomatis dan bersih.', icon: 'image', badge: 'AI CLEAN', inputType: 'url', placeholder: 'Tempel URL Gambar di sini...' },
+      { id: 'ngl-spam', name: 'NGL Spam Bot', category: 'AI & Tools', desc: 'Kirim pesan anonim NGL otomatis secara massal.', icon: 'terminal', badge: 'AUTO SPAM', inputType: 'ngl-form', placeholder: 'URL NGL' },
+      { id: 'blur-foto', name: 'Blur Foto Effect', category: 'AI & Tools', desc: 'Berikan efek blur kustom pada gambar online.', icon: 'palette', badge: 'EFFECT', inputType: 'blur-form', placeholder: 'URL Gambar' },
+      { id: 'hd-foto', name: 'HD Photo Enhancer', category: 'AI & Tools', desc: 'Tingkatkan kualitas kejernihan foto secara instan.', icon: 'sparkles', badge: 'ENHANCE HD', inputType: 'url', placeholder: 'Tempel URL Gambar di sini...' },
+      { id: 'url-to-qr', name: 'URL to QR Code', category: 'AI & Tools', desc: 'Ubah tautan web menjadi QR Code resolusi tinggi.', icon: 'terminal', badge: 'QR GEN', inputType: 'url', placeholder: 'https://...' },
 
       // --- CANVAS / IMAGE MAKERS ---
-      { id: 'fake-applemusic', name: 'Fake Apple Music', category: 'Canvas Maker', desc: 'Buat gambar player Apple Music aesthetic dengan teks & lagu custom.', icon: 'music', color: 'from-rose-500 to-red-600', inputType: 'text', placeholder: 'Judul Lagu' },
-      { id: 'fake-ff', name: 'Fake FF Lobby Maker', category: 'Canvas Maker', desc: 'Generate gambar satpam lobby Free Fire dengan nama kerenmu.', icon: 'image', color: 'from-orange-500 to-amber-500', inputType: 'text', placeholder: 'Masukkan Nama Keren (contoh: RIDZ.GAKJAGO)' },
-      { id: 'fake-tulis', name: 'Fake Tulis Buku', category: 'Canvas Maker', desc: 'Ubah teks ketikan panjang menjadi gambar tulisan tangan di atas kertas.', icon: 'file-text', color: 'from-slate-500 to-zinc-600', inputType: 'textarea', placeholder: 'Ketik teks panjang yang ingin dijadikan tulisan tangan...' },
-      { id: 'fake-windows', name: 'Windows Player Maker', category: 'Canvas Maker', desc: 'Buat gambar aesthetic bertema Windows Media Player jadul.', icon: 'terminal', color: 'from-blue-600 to-indigo-600', inputType: 'text', placeholder: 'Masukkan teks custom kamu...' }
+      { id: 'fake-applemusic', name: 'Fake Apple Music', category: 'Canvas Maker', desc: 'Buat gambar player Apple Music aesthetic dengan teks & lagu custom.', icon: 'music', badge: 'CANVAS ART', inputType: 'text', placeholder: 'Judul Lagu / Nama Artist' },
+      { id: 'fake-ff', name: 'Fake FF Lobby Maker', category: 'Canvas Maker', desc: 'Generate gambar satpam lobby Free Fire dengan nama kerenmu.', icon: 'image', badge: 'GAME LOBBY', inputType: 'text', placeholder: 'Masukkan Nama Keren (contoh: RIDZ.GAKJAGO)' },
+      { id: 'fake-tulis', name: 'Fake Tulis Buku', category: 'Canvas Maker', desc: 'Ubah teks ketikan panjang menjadi gambar tulisan tangan di atas kertas.', icon: 'file-text', badge: 'REALISTIC', inputType: 'textarea', placeholder: 'Ketik teks panjang yang ingin dijadikan tulisan tangan...' },
+      { id: 'fake-windows', name: 'Windows Player Maker', category: 'Canvas Maker', desc: 'Buat gambar aesthetic bertema Windows Media Player jadul.', icon: 'terminal', badge: 'RETRO ART', inputType: 'text', placeholder: 'Masukkan teks custom kamu...' }
     ];
 
     const CATEGORIES = ['Semua', 'Downloader', 'AI & Tools', 'Canvas Maker'];
@@ -130,15 +349,15 @@
     let searchQuery = '';
     let currentTool = null;
 
-    // --- RENDER MENU KATEGORI ---
+    // === 3. RENDER KATEGORI TAB ===
     function renderCategories() {
       const container = document.getElementById('categoryContainer');
       container.innerHTML = CATEGORIES.map(cat => `
         <button
           onclick="setCategory('${cat}')"
-          class="px-4 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
+          class="px-5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
             activeCategory === cat
-              ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25 font-semibold'
+              ? 'nexus-tab-active'
               : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800 hover:border-slate-700'
           }"
         >
@@ -147,7 +366,7 @@
       `).join('');
     }
 
-    // --- RENDER TOOLS GRID ---
+    // === 4. RENDER TOOLS GRID (UI NEXUS STYLE) ===
     function renderTools() {
       const grid = document.getElementById('toolsGrid');
       const filtered = TOOLS_CATALOG.filter(tool => {
@@ -160,29 +379,29 @@
       grid.innerHTML = filtered.map(tool => `
         <div
           onclick="openTool('${tool.id}')"
-          class="group bg-slate-900/50 hover:bg-slate-900 border border-slate-800/80 hover:border-slate-700 rounded-2xl p-6 transition-all duration-200 cursor-pointer flex flex-col justify-between hover:shadow-xl hover:-translate-y-1"
+          class="group nexus-card-subtle hover:bg-slate-900 border border-slate-800/80 hover:border-slate-700 rounded-3xl p-6 transition-all duration-200 cursor-pointer flex flex-col justify-between hover:shadow-xl hover:-translate-y-1"
         >
           <div class="space-y-4">
             <div class="flex items-start justify-between">
-              <div class="w-12 h-12 rounded-xl bg-gradient-to-tr ${tool.color} flex items-center justify-center shadow-lg">
-                <i data-lucide="${tool.icon}" class="w-6 h-6 text-white"></i>
+              <div class="w-12 h-12 rounded-2xl nexus-bg-subtle nexus-border flex items-center justify-center shadow-lg">
+                <i data-lucide="${tool.icon}" class="w-6 h-6 nexus-text"></i>
               </div>
-              <span class="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-slate-800/80 text-slate-300 border border-slate-700/60">
-                ${tool.category}
+              <span class="text-[10px] font-bold px-3 py-1 rounded-full nexus-bg-subtle nexus-text nexus-border tracking-wider uppercase">
+                ${tool.badge}
               </span>
             </div>
             <div>
-              <h3 class="font-semibold text-base text-slate-100 group-hover:text-blue-400 transition-colors">
+              <h3 class="font-nexus font-bold text-lg text-slate-100 group-hover:text-white transition-colors">
                 ${tool.name}
               </h3>
-              <p class="text-slate-400 text-xs mt-1.5 leading-relaxed line-clamp-2">
+              <p class="text-slate-400 text-xs mt-2 leading-relaxed line-clamp-2">
                 ${tool.desc}
               </p>
             </div>
           </div>
-          <div class="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs font-medium text-slate-500 group-hover:text-slate-300">
-            <span>Gunakan Tool</span>
-            <span>&rarr;</span>
+          <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-semibold text-slate-500 group-hover:text-slate-300">
+            <span>Buka Ruang Tool</span>
+            <span class="nexus-text">&rarr;</span>
           </div>
         </div>
       `).join('');
@@ -201,63 +420,70 @@
       renderTools();
     });
 
-    // --- BUKA WORKSPACE TOOL ---
+    // === 5. BUKA RUANG KERJA TOOL (WORKSPACE) ===
     function openTool(toolId) {
       currentTool = TOOLS_CATALOG.find(t => t.id === toolId);
       if (!currentTool) return;
 
       document.getElementById('dashboardView').classList.add('hidden-view');
       document.getElementById('toolWorkspaceView').classList.remove('hidden-view');
+      
+      // Reset preview ke Empty State
+      document.getElementById('emptyPreviewState').classList.remove('hidden-view');
       document.getElementById('toolResultArea').classList.add('hidden-view');
 
+      document.getElementById('toolHeaderPath').textContent = `${currentTool.name.toUpperCase()} // SECURE BRIDGE`;
       document.getElementById('toolCategoryBadge').textContent = currentTool.category;
       document.getElementById('toolTitle').textContent = currentTool.name;
       document.getElementById('toolDesc').textContent = currentTool.desc;
+
+      // Update Icon Badge
+      document.getElementById('toolIconBadge').innerHTML = `<i data-lucide="${currentTool.icon}" class="w-6 h-6 nexus-text"></i>`;
 
       const formArea = document.getElementById('formInputArea');
       
       if (currentTool.inputType === 'button-only') {
         formArea.innerHTML = `
-          <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
-            <i data-lucide="refresh-cw" class="w-4 h-4"></i> Generate Kata Hari Ini
+          <button type="submit" id="submitBtn" class="w-full nexus-btn text-white font-bold py-4 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
+            <i data-lucide="refresh-cw" class="w-5 h-5"></i> Generate Kata Hari Ini Sekarang
           </button>
         `;
       } else if (currentTool.inputType === 'textarea') {
         formArea.innerHTML = `
           <div class="space-y-3">
-            <textarea id="toolInputVal" rows="4" required placeholder="${currentTool.placeholder}" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-sm focus:outline-none focus:border-blue-500 transition-all text-slate-200 placeholder:text-slate-600"></textarea>
-            <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
-              Proses & Buat Gambar
+            <textarea id="toolInputVal" rows="4" required placeholder="${currentTool.placeholder}" class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl p-4 text-sm focus:outline-none nexus-border transition-all text-slate-100 placeholder:text-slate-600"></textarea>
+            <button type="submit" id="submitBtn" class="w-full nexus-btn text-white font-bold py-4 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
+              <i data-lucide="zap" class="w-4 h-4"></i> Proses & Generate Asset Canvas
             </button>
           </div>
         `;
       } else if (currentTool.inputType === 'ngl-form') {
         formArea.innerHTML = `
           <div class="space-y-3">
-            <input id="nglUrl" type="url" required placeholder="https://ngl.link/username" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 text-slate-200" />
-            <input id="nglJumlah" type="number" required placeholder="Jumlah spam (contoh: 5)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 text-slate-200" />
-            <input id="nglPesan" type="text" required placeholder="Isi pesan yang dikirim..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 text-slate-200" />
-            <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
-              Kirim Spam NGL
+            <input id="nglUrl" type="url" required placeholder="https://ngl.link/username" class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl px-4 py-3.5 text-sm focus:outline-none nexus-border text-slate-100" />
+            <input id="nglJumlah" type="number" required placeholder="Jumlah spam (contoh: 5)" class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl px-4 py-3.5 text-sm focus:outline-none nexus-border text-slate-100" />
+            <input id="nglPesan" type="text" required placeholder="Isi pesan yang dikirim..." class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl px-4 py-3.5 text-sm focus:outline-none nexus-border text-slate-100" />
+            <button type="submit" id="submitBtn" class="w-full nexus-btn text-white font-bold py-4 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
+              <i data-lucide="send" class="w-4 h-4"></i> Kirim Spam NGL Massal
             </button>
           </div>
         `;
       } else if (currentTool.inputType === 'blur-form') {
         formArea.innerHTML = `
           <div class="space-y-3">
-            <input id="blurUrl" type="url" required placeholder="URL Gambar / Foto" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 text-slate-200" />
-            <input id="blurPixel" type="number" required placeholder="Tingkat Pixel Blur (contoh: 5 atau 10)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 text-slate-200" />
-            <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
-              Proses Efek Blur
+            <input id="blurUrl" type="url" required placeholder="URL Gambar / Foto" class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl px-4 py-3.5 text-sm focus:outline-none nexus-border text-slate-100" />
+            <input id="blurPixel" type="number" required placeholder="Tingkat Pixel Blur (contoh: 5 atau 10)" class="w-full bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-3.5 text-sm focus:outline-none nexus-border text-slate-100" />
+            <button type="submit" id="submitBtn" class="w-full nexus-btn text-white font-bold py-4 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
+              <i data-lucide="eye-off" class="w-4 h-4"></i> Proses Efek Blur Gambar
             </button>
           </div>
         `;
       } else {
         formArea.innerHTML = `
-          <div class="flex flex-col sm:flex-row gap-2">
-            <input id="toolInputVal" type="text" required placeholder="${currentTool.placeholder}" class="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition-all text-slate-200 placeholder:text-slate-600" />
-            <button type="submit" id="submitBtn" class="bg-blue-600 hover:bg-blue-500 text-white font-medium px-6 py-3 rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
-              Proses
+          <div class="flex flex-col sm:flex-row gap-3">
+            <input id="toolInputVal" type="text" required placeholder="${currentTool.placeholder}" class="flex-1 bg-slate-950/90 border border-slate-800 rounded-2xl px-5 py-4 text-sm focus:outline-none nexus-border transition-all text-slate-100 placeholder:text-slate-600" />
+            <button type="submit" id="submitBtn" class="nexus-btn text-white font-bold px-8 py-4 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
+              <i data-lucide="zap" class="w-4 h-4"></i> Proses
             </button>
           </div>
         `;
@@ -274,14 +500,17 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // --- INTEGRASI PANGGILAN API KE BACKEND ---
+    // === 6. INTEGRASI PANGGILAN API KE BACKEND ===
     async function handleProcess(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
       const resultArea = document.getElementById('toolResultArea');
+      const emptyState = document.getElementById('emptyPreviewState');
 
       btn.disabled = true;
-      btn.innerHTML = '<span class="inline-block animate-spin">⌛</span> Processing...';
+      btn.innerHTML = '<span class="inline-block animate-spin">⌛</span> Processing Core...';
+      
+      emptyState.classList.add('hidden-view');
       resultArea.classList.add('hidden-view');
 
       let endpoint = '';
@@ -342,91 +571,103 @@
 
         if (!data.success) {
           resultArea.innerHTML = `
-            <div class="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-center text-sm">
-              Gagal memproses: ${data.message || 'Error pada server eksternal'}
+            <div class="bg-red-500/10 border border-red-500/20 text-red-400 p-6 rounded-2xl text-center text-sm">
+              <i data-lucide="alert-triangle" class="w-6 h-6 mx-auto mb-2"></i>
+              Gagal memproses asset: ${data.message || 'Error pada server eksternal'}
             </div>
           `;
+          lucide.createIcons();
           return;
         }
 
-        // --- RENDER TAMPILAN HASIL PER TOOL ---
+        // --- RENDER HASIL DENGAN GAYA NEXUS ROOM ---
         if (currentTool.id === 'quotes-today') {
-          const kata = data.data?.selected?.kata || '"Tetap semangat dan konsisten!"';
+          const kata = data.data?.selected?.kata || '"Tetap semangat dan konsisten membangun hal hebat!"';
           resultArea.innerHTML = `
-            <div class="bg-gradient-to-r from-amber-500/10 to-yellow-500/10 border border-amber-500/20 p-6 rounded-2xl text-center space-y-3">
-              <p class="text-lg font-medium italic text-slate-200 leading-relaxed">${kata}</p>
-              <span class="block text-xs font-semibold text-amber-400">— Kata Hari Ini</span>
+            <div class="nexus-card rounded-3xl p-8 text-center space-y-4 nexus-border">
+              <i data-lucide="quote" class="w-10 h-10 nexus-text mx-auto opacity-80"></i>
+              <p class="font-nexus text-xl font-bold text-white leading-relaxed tracking-wide">${kata}</p>
+              <span class="block text-xs font-semibold text-slate-400 uppercase tracking-widest">— NEXUS DAILY INSPIRATION</span>
             </div>
           `;
         } else if (currentTool.id === 'yt-mp4') {
           const formats = data.data?.formats || [];
           const optionsHtml = formats.map(f => `
-            <a href="${f.url}" target="_blank" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-xl text-xs font-semibold text-white transition-all">
-              Download ${f.resolution || 'HD'}
+            <a href="${f.url}" target="_blank" class="nexus-btn px-5 py-2.5 rounded-xl text-xs font-bold text-white transition-all">
+              Download ${f.resolution || 'HD 1080p'}
             </a>
           `).join(' ');
 
           resultArea.innerHTML = `
-            <div class="space-y-4 bg-slate-950 p-6 rounded-2xl border border-slate-800 text-center">
-              <h4 class="font-semibold text-base text-slate-200">${data.data?.title || 'YouTube Video HD'}</h4>
-              <p class="text-xs text-slate-400">Pilih resolusi video yang ingin diunduh:</p>
-              <div class="flex flex-wrap justify-center gap-2 pt-2">
-                ${optionsHtml || `<a href="${data.data?.download || '#'}" target="_blank" class="bg-emerald-600 px-4 py-2 rounded-xl text-xs font-semibold text-white">Download MP4</a>`}
+            <div class="nexus-card rounded-3xl p-6 sm:p-8 space-y-6 text-center">
+              <div class="space-y-1">
+                <span class="text-[10px] font-bold nexus-text tracking-widest uppercase">READY TO DOWNLOAD</span>
+                <h4 class="font-nexus font-bold text-lg text-white">${data.data?.title || 'YouTube Video HD'}</h4>
+              </div>
+              <p class="text-xs text-slate-400">Pilih resolusi video yang ingin disimpan ke perangkatmu:</p>
+              <div class="flex flex-wrap justify-center gap-3 pt-2">
+                ${optionsHtml || `<a href="${data.data?.download || '#'}" target="_blank" class="nexus-btn px-6 py-3 rounded-xl text-xs font-bold text-white">Download Video MP4</a>`}
               </div>
             </div>
           `;
         } else if (currentTool.id === 'ngl-spam') {
           resultArea.innerHTML = `
-            <div class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 p-5 rounded-2xl text-center space-y-1">
-              <h4 class="font-bold text-base">Spam NGL Berhasil Dikirim!</h4>
-              <p class="text-xs text-slate-400">Pesan telah diproses ke target.</p>
+            <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 p-8 rounded-3xl text-center space-y-2">
+              <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-3">
+                <i data-lucide="check-circle-2" class="w-6 h-6 text-emerald-400"></i>
+              </div>
+              <h4 class="font-nexus font-bold text-lg">Spam NGL Berhasil Dikirim!</h4>
+              <p class="text-xs text-slate-400">Paket pesan anonim telah dikirimkan ke target server NGL.</p>
             </div>
           `;
         } else if (['remove-bg', 'blur-foto', 'hd-foto', 'url-to-qr'].includes(currentTool.id)) {
           const imgResultUrl = data.data?.hasilUrl || data.data?.qrUrl || data.data?.url || data.data?.image || '#';
           resultArea.innerHTML = `
-            <div class="space-y-4 text-center">
-              <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 p-4">
-                <img src="${imgResultUrl}" alt="Result Image" class="max-h-80 object-contain mx-auto rounded-xl" />
+            <div class="nexus-card rounded-3xl p-6 sm:p-8 space-y-6 text-center">
+              <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
+                <img src="${imgResultUrl}" alt="Result Image" class="max-h-96 object-contain mx-auto rounded-xl" />
               </div>
-              <a href="${imgResultUrl}" target="_blank" download="hasil_tool.png" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-5 py-2.5 rounded-xl transition-all">
-                Buka / Unduh Gambar Hasil
+              <a href="${imgResultUrl}" target="_blank" download="nexus_asset.png" class="inline-flex items-center gap-2 nexus-btn text-white font-bold text-xs px-6 py-3.5 rounded-xl transition-all">
+                <i data-lucide="download" class="w-4 h-4"></i> Simpan Gambar ke Perangkat
               </a>
             </div>
           `;
         } else if (currentTool.category === 'Canvas Maker') {
           resultArea.innerHTML = `
-            <div class="space-y-4 text-center">
-              <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950">
-                <img src="${data.image}" alt="Canvas Render" class="w-full max-h-80 object-contain mx-auto" />
+            <div class="nexus-card rounded-3xl p-6 sm:p-8 space-y-6 text-center">
+              <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/80">
+                <img src="${data.image}" alt="Canvas Render" class="w-full max-h-96 object-contain mx-auto" />
               </div>
-              <a href="${data.image}" download="canvas_result.png" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-5 py-2.5 rounded-xl transition-all">
-                Download Gambar Canvas
+              <a href="${data.image}" download="nexus_canvas.png" class="inline-flex items-center gap-2 nexus-btn text-white font-bold text-xs px-6 py-3.5 rounded-xl transition-all">
+                <i data-lucide="download" class="w-4 h-4"></i> Download Hasil Render Canvas
               </a>
             </div>
           `;
         } else if (currentTool.category === 'AI & Tools' && (currentTool.inputType === 'chat' || currentTool.id === 'bot-feelbetter')) {
           const msg = data.data?.message || data.message || 'Balasan diterima.';
           resultArea.innerHTML = `
-            <div class="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl space-y-2">
-              <span class="text-xs font-semibold text-blue-400">Respons AI (${currentTool.name}):</span>
-              <p class="text-slate-300 text-sm leading-relaxed whitespace-pre-line">${msg}</p>
+            <div class="nexus-card rounded-3xl p-6 space-y-3">
+              <div class="flex items-center gap-2 text-xs font-bold nexus-text tracking-widest uppercase">
+                <i data-lucide="bot" class="w-4 h-4"></i> RESPONS NEXUS AI CORE:
+              </div>
+              <p class="text-slate-200 text-sm leading-relaxed whitespace-pre-line">${msg}</p>
             </div>
           `;
         } else {
-          const title = data.data?.title || data.data?.appName || `Berhasil Ekstrak (${currentTool.name})`;
+          // DEFAULT DOWNLOADERS / APK / SS WEB
+          const title = data.data?.title || data.data?.appName || `Asset Berhasil Diunduh (${currentTool.name})`;
           const thumb = data.data?.thumbnail || data.data?.cover || data.data?.image || 'https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=600&auto=format&fit=crop';
           const dlUrl = data.data?.download || data.data?.downloadUrl || data.data?.url || '#';
 
           resultArea.innerHTML = `
-            <div class="flex flex-col sm:flex-row gap-4 items-center bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
-              <img src="${thumb}" alt="Thumb" class="w-24 h-24 object-cover rounded-xl border border-slate-800" />
-              <div class="space-y-1.5 flex-1 text-center sm:text-left min-w-0">
-                <h4 class="text-sm font-semibold text-slate-200 truncate">${title}</h4>
-                <p class="text-xs text-slate-400">Siap Diunduh • Kualitas Terbaik</p>
+            <div class="nexus-card rounded-3xl p-6 flex flex-col sm:flex-row gap-5 items-center">
+              <img src="${thumb}" alt="Thumb" class="w-28 h-28 object-cover rounded-2xl border border-slate-800 shrink-0" />
+              <div class="space-y-2 flex-1 text-center sm:text-left min-w-0">
+                <h4 class="font-nexus font-bold text-base text-white truncate">${title}</h4>
+                <p class="text-xs text-slate-400">Siap Diunduh • Resolusi & Audio Original</p>
                 <div class="pt-2 flex flex-wrap gap-2 justify-center sm:justify-start">
-                  <a href="${dlUrl}" target="_blank" class="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-all">
-                    Unduh File Sekarang
+                  <a href="${dlUrl}" target="_blank" class="inline-flex items-center gap-2 nexus-btn text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all">
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i> Unduh File Sekarang
                   </a>
                 </div>
               </div>
@@ -436,17 +677,19 @@
       } catch (err) {
         resultArea.classList.remove('hidden-view');
         resultArea.innerHTML = `
-          <div class="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-center text-sm">
+          <div class="bg-red-500/10 border border-red-500/20 text-red-400 p-6 rounded-2xl text-center text-sm">
+            <i data-lucide="alert-triangle" class="w-6 h-6 mx-auto mb-2"></i>
             Gagal menghubungkan ke server API: ${err.message}
           </div>
         `;
       } finally {
         btn.disabled = false;
-        btn.innerHTML = 'Proses Selesai!';
+        btn.innerHTML = '<i data-lucide="zap" class="w-4 h-4"></i> Proses & Ekstrak Asset';
+        lucide.createIcons();
       }
     }
 
-    // --- INIT PROTOTYPE ---
+    // === 7. INISIALISASI PROTOTYPE ===
     renderCategories();
     renderTools();
   </script>
