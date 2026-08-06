@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MultiTool.io - 16 All-in-One Tools</title>
+  <title>MultiTool.io - 21 All-in-One Tools</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons CDN -->
@@ -25,7 +25,7 @@
         <span class="font-bold text-lg tracking-tight">MultiTool<span class="text-blue-500">.io</span></span>
       </div>
       <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-400">
-        16 Tools Integrated
+        21 Tools Integrated
       </span>
     </div>
   </header>
@@ -52,7 +52,7 @@
           <input
             id="searchInput"
             type="text"
-            placeholder="Cari tool (contoh: tiktok, gpt, apple music, free fire)..."
+            placeholder="Cari tool (contoh: tiktok, remove bg, apple music, ngl spam)..."
             class="w-full bg-slate-900/90 border border-slate-800 rounded-2xl pl-12 pr-4 py-3.5 text-sm focus:outline-none focus:border-blue-500 transition-all placeholder:text-slate-500 shadow-xl"
           />
         </div>
@@ -95,20 +95,30 @@
   </main>
 
   <script>
-    // === KATALOG 16 TOOLS ===
+    // === KATALOG 21 TOOLS (LENGKAP) ===
     const TOOLS_CATALOG = [
+      // --- DOWNLOADERS ---
       { id: 'tiktok-dl', name: 'TikTok Downloader', category: 'Downloader', desc: 'Download video TikTok & slide foto tanpa watermark (HD).', icon: 'video', color: 'from-pink-500 to-rose-500', inputType: 'url', placeholder: 'https://vt.tiktok.com/...' },
       { id: 'ig-dl', name: 'Instagram Downloader', category: 'Downloader', desc: 'Unduh Reels, Postingan foto, dan Carousel Instagram.', icon: 'camera', color: 'from-purple-500 to-pink-500', inputType: 'url', placeholder: 'https://www.instagram.com/reel/...' },
       { id: 'pin-dl', name: 'Pinterest Downloader', category: 'Downloader', desc: 'Unduh foto resolusi tinggi & Carousel dari Pinterest.', icon: 'image', color: 'from-red-600 to-rose-600', inputType: 'url', placeholder: 'https://pin.it/...' },
-      { id: 'yt-mp4', name: 'YouTube Video (MP4)', category: 'Downloader', desc: 'Download video YouTube berkualitas tinggi HD 1080p.', icon: 'video', color: 'from-red-500 to-orange-500', inputType: 'url', placeholder: 'https://youtu.be/...' },
+      { id: 'yt-mp4', name: 'YouTube Video (Multi Resolusi)', category: 'Downloader', desc: 'Download video YouTube dengan pilihan resolusi SD hingga HD.', icon: 'video', color: 'from-red-500 to-orange-500', inputType: 'url', placeholder: 'https://youtu.be/...' },
       { id: 'yt-mp3', name: 'YouTube Audio (MP3)', category: 'Downloader', desc: 'Konversi dan unduh audio MP3 jernih (128kbps/320kbps).', icon: 'music', color: 'from-amber-500 to-red-500', inputType: 'url', placeholder: 'https://youtu.be/...' },
       { id: 'spotify-dl', name: 'Spotify Downloader', category: 'Downloader', desc: 'Unduh lagu MP3 dari Spotify beserta cover album & metadata.', icon: 'music', color: 'from-emerald-500 to-green-600', inputType: 'url', placeholder: 'https://open.spotify.com/track/...' },
+      
+      // --- AI & GENERAL TOOLS (TERMASUK 5 TOOLS BARU) ---
       { id: 'gpt-mini', name: 'GPT-5.4 Mini AI', category: 'AI & Tools', desc: 'Chat cerdas dengan AI model terbaru tanpa perlu login.', icon: 'sparkles', color: 'from-blue-500 to-cyan-500', inputType: 'chat', placeholder: 'Tanyakan apa saja kepada AI...' },
       { id: 'ai-img', name: 'AI Image Generator', category: 'AI & Tools', desc: 'Ubah teks prompt menjadi karya seni gambar berkualitas tinggi.', icon: 'palette', color: 'from-violet-500 to-purple-600', inputType: 'prompt', placeholder: 'Contoh: A futuristic cyberpunk city at rainy night, 4k...' },
       { id: 'bot-feelbetter', name: 'FeelBetter AI Bot', category: 'AI & Tools', desc: 'Teman cerita AI yang siap mendengarkan dan memberi saran penenang.', icon: 'message-square', color: 'from-teal-500 to-emerald-500', inputType: 'chat', placeholder: 'Bagaimana perasaanmu hari ini? Ceritakan...' },
       { id: 'web2apk', name: 'Web to APK Builder', category: 'AI & Tools', desc: 'Konversi website apapun menjadi aplikasi Android (.APK) instan.', icon: 'smartphone', color: 'from-indigo-500 to-blue-600', inputType: 'url', placeholder: 'https://website-kamu.com' },
       { id: 'ss-web', name: 'FullPage Web Screenshot', category: 'AI & Tools', desc: 'Ambil tangkapan layar (screenshot) halaman web secara penuh dari atas ke bawah.', icon: 'terminal', color: 'from-cyan-500 to-blue-500', inputType: 'url', placeholder: 'https://example.com' },
       { id: 'quotes-today', name: 'Kata-Kata Hari Ini', category: 'AI & Tools', desc: 'Dapatkan kutipan & kata-kata motivasi harian penambah semangat.', icon: 'quote', color: 'from-yellow-500 to-amber-600', inputType: 'button-only' },
+      { id: 'remove-bg', name: 'Remove Background', category: 'AI & Tools', desc: 'Hapus latar belakang foto secara otomatis dan bersih.', icon: 'image', color: 'from-pink-600 to-purple-600', inputType: 'url', placeholder: 'Tempel URL Gambar di sini...' },
+      { id: 'ngl-spam', name: 'NGL Spam Bot', category: 'AI & Tools', desc: 'Kirim pesan anonim NGL otomatis secara massal.', icon: 'terminal', color: 'from-red-500 to-pink-500', inputType: 'ngl-form', placeholder: 'URL NGL' },
+      { id: 'blur-foto', name: 'Blur Foto Effect', category: 'AI & Tools', desc: 'Berikan efek blur kustom pada gambar online.', icon: 'palette', color: 'from-blue-500 to-teal-500', inputType: 'blur-form', placeholder: 'URL Gambar' },
+      { id: 'hd-foto', name: 'HD Photo Enhancer', category: 'AI & Tools', desc: 'Tingkatkan kualitas kejernihan foto secara instan.', icon: 'sparkles', color: 'from-amber-500 to-yellow-500', inputType: 'url', placeholder: 'Tempel URL Gambar di sini...' },
+      { id: 'url-to-qr', name: 'URL to QR Code', category: 'AI & Tools', desc: 'Ubah tautan web menjadi QR Code resolusi tinggi.', icon: 'terminal', color: 'from-indigo-500 to-purple-500', inputType: 'url', placeholder: 'https://...' },
+
+      // --- CANVAS / IMAGE MAKERS ---
       { id: 'fake-applemusic', name: 'Fake Apple Music', category: 'Canvas Maker', desc: 'Buat gambar player Apple Music aesthetic dengan teks & lagu custom.', icon: 'music', color: 'from-rose-500 to-red-600', inputType: 'text', placeholder: 'Judul Lagu' },
       { id: 'fake-ff', name: 'Fake FF Lobby Maker', category: 'Canvas Maker', desc: 'Generate gambar satpam lobby Free Fire dengan nama kerenmu.', icon: 'image', color: 'from-orange-500 to-amber-500', inputType: 'text', placeholder: 'Masukkan Nama Keren (contoh: RIDZ.GAKJAGO)' },
       { id: 'fake-tulis', name: 'Fake Tulis Buku', category: 'Canvas Maker', desc: 'Ubah teks ketikan panjang menjadi gambar tulisan tangan di atas kertas.', icon: 'file-text', color: 'from-slate-500 to-zinc-600', inputType: 'textarea', placeholder: 'Ketik teks panjang yang ingin dijadikan tulisan tangan...' },
@@ -205,6 +215,7 @@
       document.getElementById('toolDesc').textContent = currentTool.desc;
 
       const formArea = document.getElementById('formInputArea');
+      
       if (currentTool.inputType === 'button-only') {
         formArea.innerHTML = `
           <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
@@ -217,6 +228,27 @@
             <textarea id="toolInputVal" rows="4" required placeholder="${currentTool.placeholder}" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-sm focus:outline-none focus:border-blue-500 transition-all text-slate-200 placeholder:text-slate-600"></textarea>
             <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
               Proses & Buat Gambar
+            </button>
+          </div>
+        `;
+      } else if (currentTool.inputType === 'ngl-form') {
+        formArea.innerHTML = `
+          <div class="space-y-3">
+            <input id="nglUrl" type="url" required placeholder="https://ngl.link/username" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 text-slate-200" />
+            <input id="nglJumlah" type="number" required placeholder="Jumlah spam (contoh: 5)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 text-slate-200" />
+            <input id="nglPesan" type="text" required placeholder="Isi pesan yang dikirim..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 text-slate-200" />
+            <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
+              Kirim Spam NGL
+            </button>
+          </div>
+        `;
+      } else if (currentTool.inputType === 'blur-form') {
+        formArea.innerHTML = `
+          <div class="space-y-3">
+            <input id="blurUrl" type="url" required placeholder="URL Gambar / Foto" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 text-slate-200" />
+            <input id="blurPixel" type="number" required placeholder="Tingkat Pixel Blur (contoh: 5 atau 10)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 text-slate-200" />
+            <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
+              Proses Efek Blur
             </button>
           </div>
         `;
@@ -246,36 +278,54 @@
     async function handleProcess(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
-      const inputEl = document.getElementById('toolInputVal');
-      const inputVal = inputEl ? inputEl.value : '';
       const resultArea = document.getElementById('toolResultArea');
 
       btn.disabled = true;
       btn.innerHTML = '<span class="inline-block animate-spin">⌛</span> Processing...';
       resultArea.classList.add('hidden-view');
 
-      // Mapping Endpoint API v1
       let endpoint = '';
       let payload = {};
       let method = 'POST';
 
+      if (currentTool.inputType === 'ngl-form') {
+        payload = {
+          url: document.getElementById('nglUrl').value,
+          jumlah: document.getElementById('nglJumlah').value,
+          pesan: document.getElementById('nglPesan').value
+        };
+      } else if (currentTool.inputType === 'blur-form') {
+        payload = {
+          url: document.getElementById('blurUrl').value,
+          pixel: document.getElementById('blurPixel').value
+        };
+      } else if (currentTool.inputType !== 'button-only') {
+        const val = document.getElementById('toolInputVal').value;
+        payload = { url: val, prompt: val, text: val, nama: val, title: val, image: val, artist: 'Custom Artist' };
+      }
+
       switch (currentTool.id) {
-        case 'tiktok-dl': endpoint = '/api/v1/downloader/tiktok'; payload = { url: inputVal }; break;
-        case 'ig-dl': endpoint = '/api/v1/downloader/ig'; payload = { url: inputVal }; break;
-        case 'pin-dl': endpoint = '/api/v1/downloader/pinterest'; payload = { url: inputVal }; break;
-        case 'yt-mp4': endpoint = '/api/v1/downloader/yt-mp4'; payload = { url: inputVal }; break;
-        case 'yt-mp3': endpoint = '/api/v1/downloader/yt-mp3'; payload = { url: inputVal }; break;
-        case 'spotify-dl': endpoint = '/api/v1/downloader/spotify'; payload = { url: inputVal }; break;
-        case 'gpt-mini': endpoint = '/api/v1/ai/gpt-mini'; payload = { prompt: inputVal }; break;
-        case 'bot-feelbetter': endpoint = '/api/v1/ai/feelbetter'; payload = { prompt: inputVal }; break;
-        case 'ai-img': endpoint = '/api/v1/ai/image-gen'; payload = { prompt: inputVal }; break;
-        case 'web2apk': endpoint = '/api/v1/tools/web2apk'; payload = { url: inputVal, appName: 'MyWebAPK' }; break;
-        case 'ss-web': endpoint = '/api/v1/tools/ss-web'; payload = { url: inputVal }; break;
+        case 'tiktok-dl': endpoint = '/api/v1/downloader/tiktok'; break;
+        case 'ig-dl': endpoint = '/api/v1/downloader/ig'; break;
+        case 'pin-dl': endpoint = '/api/v1/downloader/pinterest'; break;
+        case 'yt-mp4': endpoint = '/api/v1/downloader/yt-mp4'; break;
+        case 'yt-mp3': endpoint = '/api/v1/downloader/yt-mp3'; break;
+        case 'spotify-dl': endpoint = '/api/v1/downloader/spotify'; break;
+        case 'gpt-mini': endpoint = '/api/v1/ai/gpt-mini'; break;
+        case 'bot-feelbetter': endpoint = '/api/v1/ai/feelbetter'; break;
+        case 'ai-img': endpoint = '/api/v1/ai/image-gen'; break;
+        case 'web2apk': endpoint = '/api/v1/tools/web2apk'; payload.appName = 'MyWebAPK'; break;
+        case 'ss-web': endpoint = '/api/v1/tools/ss-web'; break;
         case 'quotes-today': endpoint = '/api/v1/tools/kata-hari-ini'; method = 'GET'; break;
-        case 'fake-applemusic': endpoint = '/api/v1/canvas/fake-applemusic'; payload = { title: inputVal, artist: 'Custom Artist' }; break;
-        case 'fake-ff': endpoint = '/api/v1/canvas/fake-ff'; payload = { nama: inputVal }; break;
-        case 'fake-tulis': endpoint = '/api/v1/canvas/fake-tulis'; payload = { text: inputVal }; break;
-        case 'fake-windows': endpoint = '/api/v1/canvas/fake-windows'; payload = { text: inputVal }; break;
+        case 'remove-bg': endpoint = '/api/v1/tools/remove-bg'; break;
+        case 'ngl-spam': endpoint = '/api/v1/tools/ngl-spam'; break;
+        case 'blur-foto': endpoint = '/api/v1/tools/blur-foto'; break;
+        case 'hd-foto': endpoint = '/api/v1/tools/hd-foto'; break;
+        case 'url-to-qr': endpoint = '/api/v1/tools/url-to-qr'; break;
+        case 'fake-applemusic': endpoint = '/api/v1/canvas/fake-applemusic'; break;
+        case 'fake-ff': endpoint = '/api/v1/canvas/fake-ff'; break;
+        case 'fake-tulis': endpoint = '/api/v1/canvas/fake-tulis'; break;
+        case 'fake-windows': endpoint = '/api/v1/canvas/fake-windows'; break;
       }
 
       try {
@@ -299,7 +349,7 @@
           return;
         }
 
-        // Tampilkan Hasil Berdasarkan Jenis Kategori Tool
+        // --- RENDER TAMPILAN HASIL PER TOOL ---
         if (currentTool.id === 'quotes-today') {
           const kata = data.data?.selected?.kata || '"Tetap semangat dan konsisten!"';
           resultArea.innerHTML = `
@@ -308,13 +358,49 @@
               <span class="block text-xs font-semibold text-amber-400">— Kata Hari Ini</span>
             </div>
           `;
+        } else if (currentTool.id === 'yt-mp4') {
+          const formats = data.data?.formats || [];
+          const optionsHtml = formats.map(f => `
+            <a href="${f.url}" target="_blank" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-xl text-xs font-semibold text-white transition-all">
+              Download ${f.resolution || 'HD'}
+            </a>
+          `).join(' ');
+
+          resultArea.innerHTML = `
+            <div class="space-y-4 bg-slate-950 p-6 rounded-2xl border border-slate-800 text-center">
+              <h4 class="font-semibold text-base text-slate-200">${data.data?.title || 'YouTube Video HD'}</h4>
+              <p class="text-xs text-slate-400">Pilih resolusi video yang ingin diunduh:</p>
+              <div class="flex flex-wrap justify-center gap-2 pt-2">
+                ${optionsHtml || `<a href="${data.data?.download || '#'}" target="_blank" class="bg-emerald-600 px-4 py-2 rounded-xl text-xs font-semibold text-white">Download MP4</a>`}
+              </div>
+            </div>
+          `;
+        } else if (currentTool.id === 'ngl-spam') {
+          resultArea.innerHTML = `
+            <div class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 p-5 rounded-2xl text-center space-y-1">
+              <h4 class="font-bold text-base">Spam NGL Berhasil Dikirim!</h4>
+              <p class="text-xs text-slate-400">Pesan telah diproses ke target.</p>
+            </div>
+          `;
+        } else if (['remove-bg', 'blur-foto', 'hd-foto', 'url-to-qr'].includes(currentTool.id)) {
+          const imgResultUrl = data.data?.hasilUrl || data.data?.qrUrl || data.data?.url || data.data?.image || '#';
+          resultArea.innerHTML = `
+            <div class="space-y-4 text-center">
+              <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 p-4">
+                <img src="${imgResultUrl}" alt="Result Image" class="max-h-80 object-contain mx-auto rounded-xl" />
+              </div>
+              <a href="${imgResultUrl}" target="_blank" download="hasil_tool.png" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-5 py-2.5 rounded-xl transition-all">
+                Buka / Unduh Gambar Hasil
+              </a>
+            </div>
+          `;
         } else if (currentTool.category === 'Canvas Maker') {
           resultArea.innerHTML = `
             <div class="space-y-4 text-center">
               <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950">
                 <img src="${data.image}" alt="Canvas Render" class="w-full max-h-80 object-contain mx-auto" />
               </div>
-              <a href="${data.image}" download="canvas_result.png" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2.5 rounded-xl transition-all">
+              <a href="${data.image}" download="canvas_result.png" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-5 py-2.5 rounded-xl transition-all">
                 Download Gambar Canvas
               </a>
             </div>
@@ -328,7 +414,6 @@
             </div>
           `;
         } else {
-          // Downloader / Web Screenshot / APK Result display
           const title = data.data?.title || data.data?.appName || `Berhasil Ekstrak (${currentTool.name})`;
           const thumb = data.data?.thumbnail || data.data?.cover || data.data?.image || 'https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=600&auto=format&fit=crop';
           const dlUrl = data.data?.download || data.data?.downloadUrl || data.data?.url || '#';
