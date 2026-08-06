@@ -4,117 +4,48 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>All Tools Nexus - 21 Integrated Tools</title>
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Google Font: Orbitron & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
-    /* ========================================================
-       NEXUS THEME CSS VARIABLES (DYNAMIC COLOR THEMES)
-    ======================================================== */
     :root, [data-theme="purple"] {
-      --accent: #a855f7;
-      --accent-hover: #9333ea;
-      --accent-glow: rgba(168, 85, 247, 0.25);
-      --accent-subtle: rgba(168, 85, 247, 0.12);
-      --accent-border: rgba(168, 85, 247, 0.35);
-      --accent-grad-from: #c084fc;
-      --accent-grad-to: #7e22ce;
+      --accent: #a855f7; --accent-hover: #9333ea; --accent-glow: rgba(168, 85, 247, 0.25); --accent-subtle: rgba(168, 85, 247, 0.12); --accent-border: rgba(168, 85, 247, 0.35); --accent-grad-from: #c084fc; --accent-grad-to: #7e22ce;
     }
     [data-theme="cyan"] {
-      --accent: #06b6d4;
-      --accent-hover: #0891b2;
-      --accent-glow: rgba(6, 182, 212, 0.25);
-      --accent-subtle: rgba(6, 182, 212, 0.12);
-      --accent-border: rgba(6, 182, 212, 0.35);
-      --accent-grad-from: #22d3ee;
-      --accent-grad-to: #0e7490;
+      --accent: #06b6d4; --accent-hover: #0891b2; --accent-glow: rgba(6, 182, 212, 0.25); --accent-subtle: rgba(6, 182, 212, 0.12); --accent-border: rgba(6, 182, 212, 0.35); --accent-grad-from: #22d3ee; --accent-grad-to: #0e7490;
     }
     [data-theme="emerald"] {
-      --accent: #10b981;
-      --accent-hover: #059669;
-      --accent-glow: rgba(16, 185, 129, 0.25);
-      --accent-subtle: rgba(16, 185, 129, 0.12);
-      --accent-border: rgba(16, 185, 129, 0.35);
-      --accent-grad-from: #34d399;
-      --accent-grad-to: #047857;
+      --accent: #10b981; --accent-hover: #059669; --accent-glow: rgba(16, 185, 129, 0.25); --accent-subtle: rgba(16, 185, 129, 0.12); --accent-border: rgba(16, 185, 129, 0.35); --accent-grad-from: #34d399; --accent-grad-to: #047857;
     }
     [data-theme="rose"] {
-      --accent: #f43f5e;
-      --accent-hover: #e11d48;
-      --accent-glow: rgba(244, 63, 94, 0.25);
-      --accent-subtle: rgba(244, 63, 94, 0.12);
-      --accent-border: rgba(244, 63, 94, 0.35);
-      --accent-grad-from: #fb7185;
-      --accent-grad-to: #be123c;
+      --accent: #f43f5e; --accent-hover: #e11d48; --accent-glow: rgba(244, 63, 94, 0.25); --accent-subtle: rgba(244, 63, 94, 0.12); --accent-border: rgba(244, 63, 94, 0.35); --accent-grad-from: #fb7185; --accent-grad-to: #be123c;
     }
     [data-theme="amber"] {
-      --accent: #f59e0b;
-      --accent-hover: #d97706;
-      --accent-glow: rgba(245, 158, 11, 0.25);
-      --accent-subtle: rgba(245, 158, 11, 0.12);
-      --accent-border: rgba(245, 158, 11, 0.35);
-      --accent-grad-from: #fbbf24;
-      --accent-grad-to: #b45309;
+      --accent: #f59e0b; --accent-hover: #d97706; --accent-glow: rgba(245, 158, 11, 0.25); --accent-subtle: rgba(245, 158, 11, 0.12); --accent-border: rgba(245, 158, 11, 0.35); --accent-grad-from: #fbbf24; --accent-grad-to: #b45309;
     }
 
-    /* GLOBAL STYLES */
-    body {
-      background-color: #030712;
-      color: #f8fafc;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-    .font-nexus {
-      font-family: 'Orbitron', sans-serif;
-    }
-    .hidden-view {
-      display: none !important;
-    }
-
-    /* THEME-DEPENDENT CLASSES */
+    body { background-color: #030712; color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-nexus { font-family: 'Orbitron', sans-serif; }
+    .hidden-view { display: none !important; }
     .nexus-border { border-color: var(--accent-border); }
-    .nexus-border-subtle { border-color: rgba(255,255,255,0.08); }
     .nexus-bg-subtle { background-color: var(--accent-subtle); }
     .nexus-text { color: var(--accent); }
     .nexus-glow { box-shadow: 0 0 25px var(--accent-glow); }
-    .nexus-btn {
-      background: linear-gradient(135deg, var(--accent-grad-from), var(--accent-grad-to));
-      box-shadow: 0 4px 15px var(--accent-glow);
-    }
-    .nexus-btn:hover {
-      filter: brightness(1.1);
-      box-shadow: 0 6px 20px var(--accent-glow);
-    }
-    .nexus-card {
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--accent-border);
-    }
-    .nexus-card-subtle {
-      background: rgba(15, 23, 42, 0.5);
-      border: 1px solid rgba(255,255,255,0.07);
-    }
-    .nexus-tab-active {
-      background: linear-gradient(135deg, var(--accent-grad-from), var(--accent-grad-to));
-      color: #ffffff;
-      box-shadow: 0 4px 15px var(--accent-glow);
-    }
+    .nexus-btn { background: linear-gradient(135deg, var(--accent-grad-from), var(--accent-grad-to)); box-shadow: 0 4px 15px var(--accent-glow); }
+    .nexus-btn:hover { filter: brightness(1.1); }
+    .nexus-card { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px); border: 1px solid var(--accent-border); }
+    .nexus-card-subtle { background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.07); }
+    .nexus-tab-active { background: linear-gradient(135deg, var(--accent-grad-from), var(--accent-grad-to)); color: #ffffff; }
   </style>
 </head>
 <body class="min-h-screen bg-[#030712] text-slate-100 selection:bg-purple-500 selection:text-white">
 
-  <!-- ========================================================
-       TOP NAVBAR & THEME SWITCHER
-  ======================================================== -->
+  <!-- TOP NAVBAR & THEME SWITCHER -->
   <header class="border-b border-slate-800/80 bg-[#030712]/80 backdrop-blur-md sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-      
-      <!-- Logo Nexus -->
       <div onclick="backToDashboard()" class="flex items-center gap-3 cursor-pointer group">
         <div class="w-9 h-9 rounded-xl nexus-btn flex items-center justify-center font-bold">
           <i data-lucide="zap" class="w-5 h-5 text-white"></i>
@@ -129,40 +60,29 @@
         </div>
       </div>
 
-      <!-- Theme Switcher & Status Pill -->
       <div class="flex items-center gap-3">
-        <!-- Palette Switcher -->
         <div class="flex items-center gap-1.5 bg-slate-900/90 border border-slate-800 p-1.5 rounded-full shadow-lg">
-          <button onclick="setTheme('purple')" title="Nexus Purple" class="w-5 h-5 rounded-full bg-purple-500 hover:scale-110 transition-transform cursor-pointer"></button>
-          <button onclick="setTheme('cyan')" title="Cyber Cyan" class="w-5 h-5 rounded-full bg-cyan-400 hover:scale-110 transition-transform cursor-pointer"></button>
-          <button onclick="setTheme('emerald')" title="Matrix Emerald" class="w-5 h-5 rounded-full bg-emerald-500 hover:scale-110 transition-transform cursor-pointer"></button>
-          <button onclick="setTheme('rose')" title="Crimson Rose" class="w-5 h-5 rounded-full bg-rose-500 hover:scale-110 transition-transform cursor-pointer"></button>
-          <button onclick="setTheme('amber')" title="Solar Gold" class="w-5 h-5 rounded-full bg-amber-500 hover:scale-110 transition-transform cursor-pointer"></button>
+          <button onclick="setTheme('purple')" class="w-5 h-5 rounded-full bg-purple-500 hover:scale-110 transition-transform cursor-pointer"></button>
+          <button onclick="setTheme('cyan')" class="w-5 h-5 rounded-full bg-cyan-400 hover:scale-110 transition-transform cursor-pointer"></button>
+          <button onclick="setTheme('emerald')" class="w-5 h-5 rounded-full bg-emerald-500 hover:scale-110 transition-transform cursor-pointer"></button>
+          <button onclick="setTheme('rose')" class="w-5 h-5 rounded-full bg-rose-500 hover:scale-110 transition-transform cursor-pointer"></button>
+          <button onclick="setTheme('amber')" class="w-5 h-5 rounded-full bg-amber-500 hover:scale-110 transition-transform cursor-pointer"></button>
         </div>
-
-        <!-- Status Pill -->
         <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-300">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>ONLINE • v2.4</span>
+          <span>ONLINE • v2.5</span>
         </div>
       </div>
-
     </div>
   </header>
 
-  <!-- ========================================================
-       MAIN CONTENT WRAPPER
-  ======================================================== -->
+  <!-- MAIN CONTENT WRAPPER -->
   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
     
-    <!-- === VIEW 1: DASHBOARD UTAMA NEXUS === -->
+    <!-- DASHBOARD VIEW -->
     <div id="dashboardView" class="space-y-8 animate-in fade-in duration-300">
-      
-      <!-- HERO & TELEMETRY BANNER -->
       <div class="nexus-card rounded-3xl p-6 sm:p-8 relative overflow-hidden nexus-glow">
-        <!-- Background decorative glow -->
         <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full nexus-bg-subtle blur-3xl pointer-events-none"></div>
-        
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div class="space-y-2 max-w-xl">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full nexus-bg-subtle nexus-border text-xs font-semibold nexus-text uppercase tracking-wider">
@@ -172,172 +92,97 @@
               NEXUS <span class="nexus-text">INTEGRATED</span> TOOLS
             </h1>
             <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-              Platform ekosistem 21 fitur downloader sosial media, artificial intelligence, dan generator gambar canvas dalam satu antarmuka terenkripsi.
+              Platform ekosistem 21 fitur downloader sosial media, artificial intelligence, dan generator gambar canvas cepat & stabil.
             </p>
           </div>
-
-          <!-- Telemetry Device Info Pill Box -->
           <div class="bg-slate-950/80 border border-slate-800/80 rounded-2xl p-4 space-y-2 min-w-[240px] text-xs">
-            <div class="flex items-center justify-between text-slate-400">
-              <span>NEGARA</span>
-              <span class="text-slate-200 font-semibold flex items-center gap-1.5">
-                🇮🇩 Indonesia
-              </span>
-            </div>
-            <div class="flex items-center justify-between text-slate-400">
-              <span>SYSTEM STATUS</span>
-              <span class="text-emerald-400 font-semibold flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> 99.9% Uptime
-              </span>
-            </div>
-            <div class="flex items-center justify-between text-slate-400">
-              <span>ROLE ACCESS</span>
-              <span class="nexus-text font-semibold uppercase tracking-wider">VVIP / DEV</span>
-            </div>
+            <div class="flex items-center justify-between text-slate-400"><span>NEGARA</span><span class="text-slate-200 font-semibold">🇮🇩 Indonesia</span></div>
+            <div class="flex items-center justify-between text-slate-400"><span>SYSTEM STATUS</span><span class="text-emerald-400 font-semibold">99.9% Uptime</span></div>
+            <div class="flex items-center justify-between text-slate-400"><span>ROLE ACCESS</span><span class="nexus-text font-semibold uppercase">VVIP / DEV</span></div>
           </div>
         </div>
-
-        <!-- Search Bar in Hero -->
         <div class="mt-6 pt-6 border-t border-slate-800/80">
           <div class="relative">
             <i data-lucide="search" class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
-            <input
-              id="searchInput"
-              type="text"
-              placeholder="Cari tool Nexus (contoh: tiktok, remove bg, apple music, ngl spam, free fire)..."
-              class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl pl-12 pr-4 py-3.5 text-sm focus:outline-none nexus-border transition-all placeholder:text-slate-500 text-slate-100 shadow-xl"
-            />
+            <input id="searchInput" type="text" placeholder="Cari tool Nexus..." class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl pl-12 pr-4 py-3.5 text-sm focus:outline-none nexus-border text-slate-100 shadow-xl" />
           </div>
         </div>
       </div>
 
-      <!-- FILTER KATEGORI TABS -->
       <div id="categoryContainer" class="flex items-center justify-center gap-2 flex-wrap"></div>
-
-      <!-- GRID KATALOG TOOLS -->
       <div id="toolsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
     </div>
 
-    <!-- === VIEW 2: WORKSPACE PER-TOOL (NEXUS ROOM) === -->
+    <!-- WORKSPACE VIEW -->
     <div id="toolWorkspaceView" class="max-w-3xl mx-auto space-y-6 hidden-view">
-      
-      <!-- Nav Back Bar -->
       <div class="flex items-center justify-between">
-        <button
-          onclick="backToDashboard()"
-          class="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white bg-slate-900 border border-slate-800 px-4 py-2.5 rounded-xl transition-all cursor-pointer hover:border-slate-700"
-        >
-          <i data-lucide="arrow-left" class="w-4 h-4"></i> All Tools Nexus
+        <button onclick="backToDashboard()" class="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white bg-slate-900 border border-slate-800 px-4 py-2.5 rounded-xl transition-all cursor-pointer">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Daftar
         </button>
-        <span id="toolHeaderPath" class="font-nexus text-xs tracking-widest text-slate-400 uppercase">
-          TOOL ROOM // SECURE BRIDGE
-        </span>
+        <span id="toolHeaderPath" class="font-nexus text-xs tracking-widest text-slate-400 uppercase">TOOL ROOM // SECURE BRIDGE</span>
       </div>
 
-      <!-- STATUS & TELEMETRY BOX -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div class="nexus-card-subtle rounded-2xl p-3.5 flex items-center gap-3">
-          <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
-          <div>
-            <span class="block text-[10px] text-slate-400 uppercase font-semibold">STATUS SERVER</span>
-            <span class="text-xs font-bold text-slate-200">Online — 99.9%</span>
-          </div>
-        </div>
-        <div class="nexus-card-subtle rounded-2xl p-3.5 flex items-center gap-3">
-          <i data-lucide="cpu" class="w-5 h-5 nexus-text"></i>
-          <div>
-            <span class="block text-[10px] text-slate-400 uppercase font-semibold">ENGINE ROUTE</span>
-            <span class="text-xs font-bold text-slate-200">Nexus CDN v2.4</span>
-          </div>
-        </div>
-        <div class="nexus-card-subtle rounded-2xl p-3.5 flex items-center gap-3">
-          <i data-lucide="lock" class="w-5 h-5 nexus-text"></i>
-          <div>
-            <span class="block text-[10px] text-slate-400 uppercase font-semibold">SECURITY LAYER</span>
-            <span class="text-xs font-bold text-slate-200">Encrypted Bridge</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- MAIN TOOL WORKSPACE CARD -->
       <div class="nexus-card rounded-3xl p-6 sm:p-8 space-y-6 nexus-glow">
-        <!-- Title Header -->
         <div class="flex items-start justify-between border-b border-slate-800/80 pb-5">
           <div class="space-y-1">
             <span id="toolCategoryBadge" class="text-xs font-bold nexus-text uppercase tracking-widest"></span>
             <h2 id="toolTitle" class="font-nexus text-2xl sm:text-3xl font-bold text-white tracking-wide"></h2>
             <p id="toolDesc" class="text-slate-400 text-sm"></p>
           </div>
-          <div id="toolIconBadge" class="w-12 h-12 rounded-2xl nexus-bg-subtle nexus-border flex items-center justify-center shrink-0">
-            <i data-lucide="zap" class="w-6 h-6 nexus-text"></i>
-          </div>
+          <div id="toolIconBadge" class="w-12 h-12 rounded-2xl nexus-bg-subtle nexus-border flex items-center justify-center shrink-0"></div>
         </div>
 
-        <!-- FORM INPUT DYNAMIC -->
         <form id="toolForm" class="space-y-4" onsubmit="handleProcess(event)">
           <div id="formInputArea"></div>
         </form>
 
-        <!-- PREVIEW / RESULT CONTAINER -->
         <div id="toolResultContainer" class="pt-2">
-          <!-- Empty State (Sebelum Eksekusi) -->
           <div id="emptyPreviewState" class="nexus-card-subtle rounded-2xl p-8 text-center space-y-3 border-dashed border-slate-800">
-            <div class="w-14 h-14 rounded-2xl nexus-bg-subtle flex items-center justify-center mx-auto">
-              <i data-lucide="layers" class="w-7 h-7 nexus-text"></i>
-            </div>
-            <div>
-              <h4 class="text-sm font-semibold text-slate-300">Belum Ada Preview</h4>
-              <p class="text-xs text-slate-500 mt-1">Masukkan data atau tautan pada kolom di atas lalu tekan tombol proses.</p>
-            </div>
+            <div class="w-14 h-14 rounded-2xl nexus-bg-subtle flex items-center justify-center mx-auto"><i data-lucide="layers" class="w-7 h-7 nexus-text"></i></div>
+            <h4 class="text-sm font-semibold text-slate-300">Belum Ada Preview</h4>
+            <p class="text-xs text-slate-500">Masukkan data atau pilih gambar pada kolom di atas lalu tekan tombol proses.</p>
           </div>
-
-          <!-- Active Result Area (Setelah Eksekusi) -->
           <div id="toolResultArea" class="hidden-view"></div>
         </div>
       </div>
-
     </div>
 
   </main>
 
-  <!-- ========================================================
-       JAVASCRIPT LOGIC & 21 TOOLS INTEGRATION
-  ======================================================== -->
   <script>
-    // === 1. TEMA WARNA SWITCHER ===
+    // 1. TEMA WARNA
     function setTheme(themeName) {
       document.documentElement.setAttribute('data-theme', themeName);
       localStorage.setItem('nexus_theme', themeName);
     }
+    setTheme(localStorage.getItem('nexus_theme') || 'purple');
 
-    // Load saved theme on load
-    const savedTheme = localStorage.getItem('nexus_theme') || 'purple';
-    setTheme(savedTheme);
+    // 2. SIMPAN POSISI SCROLL AGAR TIDAK CAPE SCROLL ULANG
+    let lastScrollPosition = 0;
 
-    // === 2. KATALOG 21 TOOLS (LENGKAP TANPA ADA YANG DIHAPUS) ===
+    // 3. DATA 21 TOOLS
     const TOOLS_CATALOG = [
-      // --- DOWNLOADERS ---
-      { id: 'tiktok-dl', name: 'TikTok Downloader', category: 'Downloader', desc: 'Download video TikTok & slide foto tanpa watermark (HD).', icon: 'video', badge: 'MP4/MP3/JPG', inputType: 'url', placeholder: 'Tempel link TikTok di sini (https://vt.tiktok.com/...)' },
+      { id: 'tiktok-dl', name: 'TikTok Downloader', category: 'Downloader', desc: 'Download video TikTok tanpa watermark (HD) dengan sangat cepat.', icon: 'video', badge: 'MP4 HD', inputType: 'url', placeholder: 'Tempel link TikTok di sini (https://vt.tiktok.com/...)' },
       { id: 'ig-dl', name: 'Instagram Downloader', category: 'Downloader', desc: 'Unduh Reels, Postingan foto, dan Carousel Instagram resolusi HD.', icon: 'camera', badge: 'HD REELS', inputType: 'url', placeholder: 'Tempel link Instagram di sini (https://www.instagram.com/reel/...)' },
       { id: 'pin-dl', name: 'Pinterest Downloader', category: 'Downloader', desc: 'Unduh foto resolusi tinggi & Carousel media dari Pinterest.', icon: 'image', badge: 'IMAGE/HD', inputType: 'url', placeholder: 'Tempel link Pinterest di sini (https://pin.it/...)' },
-      { id: 'yt-mp4', name: 'YouTube Video (Multi-Res)', category: 'Downloader', desc: 'Download video YouTube dengan pilihan resolusi SD hingga HD 1080p.', icon: 'video', badge: 'MP4 HD', inputType: 'url', placeholder: 'Tempel link YouTube di sini (https://youtu.be/...)' },
-      { id: 'yt-mp3', name: 'YouTube Audio (MP3)', category: 'Downloader', desc: 'Konversi dan unduh audio MP3 jernih (128kbps/320kbps).', icon: 'music', badge: 'MP3 AUDIO', inputType: 'url', placeholder: 'Tempel link YouTube di sini (https://youtu.be/...)' },
+      { id: 'yt-mp4', name: 'YouTube Video (Multi-Res)', category: 'Downloader', desc: 'Download video YouTube dengan pilihan resolusi 360p hingga HD 1080p.', icon: 'video', badge: 'MP4 HD', inputType: 'url', placeholder: 'Tempel link YouTube di sini (https://youtu.be/...)' },
+      { id: 'yt-mp3', name: 'YouTube Audio (MP3)', category: 'Downloader', desc: 'Konversi dan unduh audio MP3 jernih super cepat.', icon: 'music', badge: 'MP3 AUDIO', inputType: 'url', placeholder: 'Tempel link YouTube di sini (https://youtu.be/...)' },
       { id: 'spotify-dl', name: 'Spotify Downloader', category: 'Downloader', desc: 'Unduh lagu MP3 dari Spotify beserta cover album & metadata asli.', icon: 'music', badge: 'SPOTIFY MP3', inputType: 'url', placeholder: 'Tempel link Spotify track di sini (https://open.spotify.com/track/...)' },
       
-      // --- AI & GENERAL TOOLS ---
       { id: 'gpt-mini', name: 'GPT-5.4 Mini AI', category: 'AI & Tools', desc: 'Chat cerdas dengan AI model terbaru tanpa perlu login.', icon: 'sparkles', badge: 'AI CHAT', inputType: 'chat', placeholder: 'Tanyakan apa saja kepada Nexus AI...' },
       { id: 'ai-img', name: 'AI Image Generator', category: 'AI & Tools', desc: 'Ubah teks prompt menjadi karya seni gambar berkualitas tinggi.', icon: 'palette', badge: 'AI ART', inputType: 'prompt', placeholder: 'Contoh prompt: A futuristic cyberpunk city at rainy night, 4k...' },
       { id: 'bot-feelbetter', name: 'FeelBetter AI Bot', category: 'AI & Tools', desc: 'Teman cerita AI yang siap mendengarkan dan memberi saran penenang.', icon: 'message-square', badge: 'AI BOT', inputType: 'chat', placeholder: 'Bagaimana perasaanmu hari ini? Ceritakan...' },
       { id: 'web2apk', name: 'Web to APK Builder', category: 'AI & Tools', desc: 'Konversi website apapun menjadi aplikasi Android (.APK) instan.', icon: 'smartphone', badge: 'APK BUILD', inputType: 'url', placeholder: 'https://website-kamu.com' },
       { id: 'ss-web', name: 'FullPage Web Screenshot', category: 'AI & Tools', desc: 'Ambil tangkapan layar (screenshot) halaman web secara penuh dari atas ke bawah.', icon: 'terminal', badge: 'FULL SS', inputType: 'url', placeholder: 'https://example.com' },
       { id: 'quotes-today', name: 'Kata-Kata Hari Ini', category: 'AI & Tools', desc: 'Dapatkan kutipan & kata-kata motivasi harian penambah semangat.', icon: 'quote', badge: 'MOTIVATION', inputType: 'button-only' },
-      { id: 'remove-bg', name: 'Remove Background', category: 'AI & Tools', desc: 'Hapus latar belakang foto secara otomatis dan bersih.', icon: 'image', badge: 'AI CLEAN', inputType: 'url', placeholder: 'Tempel URL Gambar di sini...' },
-      { id: 'ngl-spam', name: 'NGL Spam Bot', category: 'AI & Tools', desc: 'Kirim pesan anonim NGL otomatis secara massal.', icon: 'terminal', badge: 'AUTO SPAM', inputType: 'ngl-form', placeholder: 'URL NGL' },
-      { id: 'blur-foto', name: 'Blur Foto Effect', category: 'AI & Tools', desc: 'Berikan efek blur kustom pada gambar online.', icon: 'palette', badge: 'EFFECT', inputType: 'blur-form', placeholder: 'URL Gambar' },
-      { id: 'hd-foto', name: 'HD Photo Enhancer', category: 'AI & Tools', desc: 'Tingkatkan kualitas kejernihan foto secara instan.', icon: 'sparkles', badge: 'ENHANCE HD', inputType: 'url', placeholder: 'Tempel URL Gambar di sini...' },
+      
+      // TOOLS YANG MENGGUNAKAN TOMBOL UPLOAD GAMBAR (INPUT TYPE="FILE")
+      { id: 'remove-bg', name: 'Remove Background', category: 'AI & Tools', desc: 'Hapus latar belakang foto kamu langsung dengan upload gambar.', icon: 'image', badge: 'AI CLEAN', inputType: 'upload-image' },
+      { id: 'ngl-spam', name: 'NGL Spam Bot', category: 'AI & Tools', desc: 'Kirim pesan anonim NGL otomatis secara massal.', icon: 'terminal', badge: 'AUTO SPAM', inputType: 'ngl-form' },
+      { id: 'blur-foto', name: 'Blur Foto Effect', category: 'AI & Tools', desc: 'Berikan efek blur kustom pada foto dari galeri HP-mu.', icon: 'palette', badge: 'EFFECT', inputType: 'upload-blur' },
+      { id: 'hd-foto', name: 'HD Photo Enhancer', category: 'AI & Tools', desc: 'Tingkatkan kualitas kejernihan foto kamu menjadi HD instan.', icon: 'sparkles', badge: 'ENHANCE HD', inputType: 'upload-image' },
       { id: 'url-to-qr', name: 'URL to QR Code', category: 'AI & Tools', desc: 'Ubah tautan web menjadi QR Code resolusi tinggi.', icon: 'terminal', badge: 'QR GEN', inputType: 'url', placeholder: 'https://...' },
 
-      // --- CANVAS / IMAGE MAKERS ---
       { id: 'fake-applemusic', name: 'Fake Apple Music', category: 'Canvas Maker', desc: 'Buat gambar player Apple Music aesthetic dengan teks & lagu custom.', icon: 'music', badge: 'CANVAS ART', inputType: 'text', placeholder: 'Judul Lagu / Nama Artist' },
       { id: 'fake-ff', name: 'Fake FF Lobby Maker', category: 'Canvas Maker', desc: 'Generate gambar satpam lobby Free Fire dengan nama kerenmu.', icon: 'image', badge: 'GAME LOBBY', inputType: 'text', placeholder: 'Masukkan Nama Keren (contoh: RIDZ.GAKJAGO)' },
       { id: 'fake-tulis', name: 'Fake Tulis Buku', category: 'Canvas Maker', desc: 'Ubah teks ketikan panjang menjadi gambar tulisan tangan di atas kertas.', icon: 'file-text', badge: 'REALISTIC', inputType: 'textarea', placeholder: 'Ketik teks panjang yang ingin dijadikan tulisan tangan...' },
@@ -348,64 +193,42 @@
     let activeCategory = 'Semua';
     let searchQuery = '';
     let currentTool = null;
+    let uploadedImageBase64 = ''; // Menyimpan gambar yang diupload pengguna
 
-    // === 3. RENDER KATEGORI TAB ===
     function renderCategories() {
       const container = document.getElementById('categoryContainer');
       container.innerHTML = CATEGORIES.map(cat => `
-        <button
-          onclick="setCategory('${cat}')"
-          class="px-5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-            activeCategory === cat
-              ? 'nexus-tab-active'
-              : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800 hover:border-slate-700'
-          }"
-        >
-          ${cat}
-        </button>
+        <button onclick="setCategory('${cat}')" class="px-5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+          activeCategory === cat ? 'nexus-tab-active' : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
+        }">${cat}</button>
       `).join('');
     }
 
-    // === 4. RENDER TOOLS GRID (UI NEXUS STYLE) ===
     function renderTools() {
       const grid = document.getElementById('toolsGrid');
       const filtered = TOOLS_CATALOG.filter(tool => {
         const matchCat = activeCategory === 'Semua' || tool.category === activeCategory;
-        const matchSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                            tool.desc.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) || tool.desc.toLowerCase().includes(searchQuery.toLowerCase());
         return matchCat && matchSearch;
       });
 
       grid.innerHTML = filtered.map(tool => `
-        <div
-          onclick="openTool('${tool.id}')"
-          class="group nexus-card-subtle hover:bg-slate-900 border border-slate-800/80 hover:border-slate-700 rounded-3xl p-6 transition-all duration-200 cursor-pointer flex flex-col justify-between hover:shadow-xl hover:-translate-y-1"
-        >
+        <div onclick="openTool('${tool.id}')" class="group nexus-card-subtle hover:bg-slate-900 border border-slate-800/80 rounded-3xl p-6 transition-all duration-200 cursor-pointer flex flex-col justify-between hover:shadow-xl hover:-translate-y-1">
           <div class="space-y-4">
             <div class="flex items-start justify-between">
-              <div class="w-12 h-12 rounded-2xl nexus-bg-subtle nexus-border flex items-center justify-center shadow-lg">
-                <i data-lucide="${tool.icon}" class="w-6 h-6 nexus-text"></i>
-              </div>
-              <span class="text-[10px] font-bold px-3 py-1 rounded-full nexus-bg-subtle nexus-text nexus-border tracking-wider uppercase">
-                ${tool.badge}
-              </span>
+              <div class="w-12 h-12 rounded-2xl nexus-bg-subtle nexus-border flex items-center justify-center shadow-lg"><i data-lucide="${tool.icon}" class="w-6 h-6 nexus-text"></i></div>
+              <span class="text-[10px] font-bold px-3 py-1 rounded-full nexus-bg-subtle nexus-text nexus-border tracking-wider uppercase">${tool.badge}</span>
             </div>
             <div>
-              <h3 class="font-nexus font-bold text-lg text-slate-100 group-hover:text-white transition-colors">
-                ${tool.name}
-              </h3>
-              <p class="text-slate-400 text-xs mt-2 leading-relaxed line-clamp-2">
-                ${tool.desc}
-              </p>
+              <h3 class="font-nexus font-bold text-lg text-slate-100 group-hover:text-white transition-colors">${tool.name}</h3>
+              <p class="text-slate-400 text-xs mt-2 leading-relaxed line-clamp-2">${tool.desc}</p>
             </div>
           </div>
           <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-semibold text-slate-500 group-hover:text-slate-300">
-            <span>Buka Ruang Tool</span>
-            <span class="nexus-text">&rarr;</span>
+            <span>Buka Ruang Tool</span><span class="nexus-text">&rarr;</span>
           </div>
         </div>
       `).join('');
-
       lucide.createIcons();
     }
 
@@ -420,15 +243,15 @@
       renderTools();
     });
 
-    // === 5. BUKA RUANG KERJA TOOL (WORKSPACE) ===
+    // 4. BUKA TOOL & CEGAH LOMPAT SCROLL
     function openTool(toolId) {
+      lastScrollPosition = window.scrollY; // Catat posisi scroll
       currentTool = TOOLS_CATALOG.find(t => t.id === toolId);
       if (!currentTool) return;
 
+      uploadedImageBase64 = ''; // Reset gambar upload
       document.getElementById('dashboardView').classList.add('hidden-view');
       document.getElementById('toolWorkspaceView').classList.remove('hidden-view');
-      
-      // Reset preview ke Empty State
       document.getElementById('emptyPreviewState').classList.remove('hidden-view');
       document.getElementById('toolResultArea').classList.add('hidden-view');
 
@@ -436,25 +259,45 @@
       document.getElementById('toolCategoryBadge').textContent = currentTool.category;
       document.getElementById('toolTitle').textContent = currentTool.name;
       document.getElementById('toolDesc').textContent = currentTool.desc;
-
-      // Update Icon Badge
       document.getElementById('toolIconBadge').innerHTML = `<i data-lucide="${currentTool.icon}" class="w-6 h-6 nexus-text"></i>`;
 
       const formArea = document.getElementById('formInputArea');
       
       if (currentTool.inputType === 'button-only') {
+        formArea.innerHTML = `<button type="submit" id="submitBtn" class="w-full nexus-btn text-white font-bold py-4 rounded-2xl text-sm flex items-center justify-center gap-2 cursor-pointer"><i data-lucide="refresh-cw" class="w-5 h-5"></i> Generate Kata Hari Ini</button>`;
+      } else if (currentTool.inputType === 'upload-image') {
         formArea.innerHTML = `
-          <button type="submit" id="submitBtn" class="w-full nexus-btn text-white font-bold py-4 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
-            <i data-lucide="refresh-cw" class="w-5 h-5"></i> Generate Kata Hari Ini Sekarang
-          </button>
+          <div class="space-y-4">
+            <div class="border-2 border-dashed border-slate-700 rounded-2xl p-6 text-center hover:border-purple-500 transition-colors">
+              <input type="file" id="fileUploader" accept="image/*" required class="hidden" onchange="previewImageFile(event)" />
+              <label for="fileUploader" class="cursor-pointer block space-y-2">
+                <i data-lucide="upload-cloud" class="w-10 h-10 nexus-text mx-auto"></i>
+                <span class="block text-sm font-semibold text-slate-300" id="uploadLabel">Pilih atau Ambil Foto dari HP-mu</span>
+                <span class="block text-xs text-slate-500">Mendukung format JPG, PNG, WEBP</span>
+              </label>
+            </div>
+            <button type="submit" id="submitBtn" class="w-full nexus-btn text-white font-bold py-4 rounded-2xl text-sm flex items-center justify-center gap-2 cursor-pointer"><i data-lucide="zap" class="w-4 h-4"></i> Proses & Ekstrak Asset</button>
+          </div>
+        `;
+      } else if (currentTool.inputType === 'upload-blur') {
+        formArea.innerHTML = `
+          <div class="space-y-4">
+            <div class="border-2 border-dashed border-slate-700 rounded-2xl p-6 text-center hover:border-purple-500 transition-colors">
+              <input type="file" id="fileUploader" accept="image/*" required class="hidden" onchange="previewImageFile(event)" />
+              <label for="fileUploader" class="cursor-pointer block space-y-2">
+                <i data-lucide="upload-cloud" class="w-10 h-10 nexus-text mx-auto"></i>
+                <span class="block text-sm font-semibold text-slate-300" id="uploadLabel">Pilih atau Ambil Foto dari HP-mu</span>
+              </label>
+            </div>
+            <input id="blurPixel" type="number" required placeholder="Tingkat Pixel Blur (contoh: 5 atau 10)" class="w-full bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-3.5 text-sm focus:outline-none nexus-border text-slate-100" />
+            <button type="submit" id="submitBtn" class="w-full nexus-btn text-white font-bold py-4 rounded-2xl text-sm flex items-center justify-center gap-2 cursor-pointer"><i data-lucide="eye-off" class="w-4 h-4"></i> Proses Efek Blur Gambar</button>
+          </div>
         `;
       } else if (currentTool.inputType === 'textarea') {
         formArea.innerHTML = `
           <div class="space-y-3">
-            <textarea id="toolInputVal" rows="4" required placeholder="${currentTool.placeholder}" class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl p-4 text-sm focus:outline-none nexus-border transition-all text-slate-100 placeholder:text-slate-600"></textarea>
-            <button type="submit" id="submitBtn" class="w-full nexus-btn text-white font-bold py-4 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
-              <i data-lucide="zap" class="w-4 h-4"></i> Proses & Generate Asset Canvas
-            </button>
+            <textarea id="toolInputVal" rows="4" required placeholder="${currentTool.placeholder}" class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl p-4 text-sm focus:outline-none nexus-border text-slate-100"></textarea>
+            <button type="submit" id="submitBtn" class="w-full nexus-btn text-white font-bold py-4 rounded-2xl text-sm flex items-center justify-center gap-2 cursor-pointer"><i data-lucide="zap" class="w-4 h-4"></i> Proses & Generate Asset Canvas</button>
           </div>
         `;
       } else if (currentTool.inputType === 'ngl-form') {
@@ -463,28 +306,14 @@
             <input id="nglUrl" type="url" required placeholder="https://ngl.link/username" class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl px-4 py-3.5 text-sm focus:outline-none nexus-border text-slate-100" />
             <input id="nglJumlah" type="number" required placeholder="Jumlah spam (contoh: 5)" class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl px-4 py-3.5 text-sm focus:outline-none nexus-border text-slate-100" />
             <input id="nglPesan" type="text" required placeholder="Isi pesan yang dikirim..." class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl px-4 py-3.5 text-sm focus:outline-none nexus-border text-slate-100" />
-            <button type="submit" id="submitBtn" class="w-full nexus-btn text-white font-bold py-4 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
-              <i data-lucide="send" class="w-4 h-4"></i> Kirim Spam NGL Massal
-            </button>
-          </div>
-        `;
-      } else if (currentTool.inputType === 'blur-form') {
-        formArea.innerHTML = `
-          <div class="space-y-3">
-            <input id="blurUrl" type="url" required placeholder="URL Gambar / Foto" class="w-full bg-slate-950/90 border border-slate-800 rounded-2xl px-4 py-3.5 text-sm focus:outline-none nexus-border text-slate-100" />
-            <input id="blurPixel" type="number" required placeholder="Tingkat Pixel Blur (contoh: 5 atau 10)" class="w-full bg-slate-950/90 border border-slate-800 rounded-xl px-4 py-3.5 text-sm focus:outline-none nexus-border text-slate-100" />
-            <button type="submit" id="submitBtn" class="w-full nexus-btn text-white font-bold py-4 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
-              <i data-lucide="eye-off" class="w-4 h-4"></i> Proses Efek Blur Gambar
-            </button>
+            <button type="submit" id="submitBtn" class="w-full nexus-btn text-white font-bold py-4 rounded-2xl text-sm flex items-center justify-center gap-2 cursor-pointer"><i data-lucide="send" class="w-4 h-4"></i> Kirim Spam NGL Massal</button>
           </div>
         `;
       } else {
         formArea.innerHTML = `
           <div class="flex flex-col sm:flex-row gap-3">
-            <input id="toolInputVal" type="text" required placeholder="${currentTool.placeholder}" class="flex-1 bg-slate-950/90 border border-slate-800 rounded-2xl px-5 py-4 text-sm focus:outline-none nexus-border transition-all text-slate-100 placeholder:text-slate-600" />
-            <button type="submit" id="submitBtn" class="nexus-btn text-white font-bold px-8 py-4 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
-              <i data-lucide="zap" class="w-4 h-4"></i> Proses
-            </button>
+            <input id="toolInputVal" type="text" required placeholder="${currentTool.placeholder}" class="flex-1 bg-slate-950/90 border border-slate-800 rounded-2xl px-5 py-4 text-sm focus:outline-none nexus-border text-slate-100" />
+            <button type="submit" id="submitBtn" class="nexus-btn text-white font-bold px-8 py-4 rounded-2xl text-sm flex items-center justify-center gap-2 cursor-pointer"><i data-lucide="zap" class="w-4 h-4"></i> Proses</button>
           </div>
         `;
       }
@@ -493,14 +322,27 @@
       lucide.createIcons();
     }
 
+    // HANDLER PREVIEW GAMBAR UPLOAD
+    function previewImageFile(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      document.getElementById('uploadLabel').textContent = `Foto terpilih: ${file.name}`;
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        uploadedImageBase64 = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // 5. KEMBALI KE DASHBOARD & RETAN SCROLL (TIDAK OTOMATIS KE ATAS)
     function backToDashboard() {
       currentTool = null;
       document.getElementById('toolWorkspaceView').classList.add('hidden-view');
       document.getElementById('dashboardView').classList.remove('hidden-view');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: lastScrollPosition, behavior: 'instant' });
     }
 
-    // === 6. INTEGRASI PANGGILAN API KE BACKEND ===
+    // 6. PROSES API GACOR
     async function handleProcess(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
@@ -508,26 +350,20 @@
       const emptyState = document.getElementById('emptyPreviewState');
 
       btn.disabled = true;
-      btn.innerHTML = '<span class="inline-block animate-spin">⌛</span> Processing Core...';
-      
+      btn.innerHTML = '<span class="inline-block animate-spin">⌛</span> Memproses...';
       emptyState.classList.add('hidden-view');
       resultArea.classList.add('hidden-view');
 
-      let endpoint = '';
-      let payload = {};
-      let method = 'POST';
+      let endpoint = '', payload = {}, method = 'POST';
 
       if (currentTool.inputType === 'ngl-form') {
-        payload = {
-          url: document.getElementById('nglUrl').value,
-          jumlah: document.getElementById('nglJumlah').value,
-          pesan: document.getElementById('nglPesan').value
-        };
-      } else if (currentTool.inputType === 'blur-form') {
-        payload = {
-          url: document.getElementById('blurUrl').value,
-          pixel: document.getElementById('blurPixel').value
-        };
+        payload = { url: document.getElementById('nglUrl').value, jumlah: document.getElementById('nglJumlah').value, pesan: document.getElementById('nglPesan').value };
+      } else if (currentTool.inputType === 'upload-image') {
+        if (!uploadedImageBase64) { alert('Silahkan pilih foto terlebih dahulu!'); btn.disabled = false; return; }
+        payload = { image: uploadedImageBase64 };
+      } else if (currentTool.inputType === 'upload-blur') {
+        if (!uploadedImageBase64) { alert('Silahkan pilih foto terlebih dahulu!'); btn.disabled = false; return; }
+        payload = { image: uploadedImageBase64, pixel: document.getElementById('blurPixel').value };
       } else if (currentTool.inputType !== 'button-only') {
         const val = document.getElementById('toolInputVal').value;
         payload = { url: val, prompt: val, text: val, nama: val, title: val, image: val, artist: 'Custom Artist' };
@@ -543,7 +379,7 @@
         case 'gpt-mini': endpoint = '/api/v1/ai/gpt-mini'; break;
         case 'bot-feelbetter': endpoint = '/api/v1/ai/feelbetter'; break;
         case 'ai-img': endpoint = '/api/v1/ai/image-gen'; break;
-        case 'web2apk': endpoint = '/api/v1/tools/web2apk'; payload.appName = 'MyWebAPK'; break;
+        case 'web2apk': endpoint = '/api/v1/tools/web2apk'; payload.appName = 'NexusApp'; break;
         case 'ss-web': endpoint = '/api/v1/tools/ss-web'; break;
         case 'quotes-today': endpoint = '/api/v1/tools/kata-hari-ini'; method = 'GET'; break;
         case 'remove-bg': endpoint = '/api/v1/tools/remove-bg'; break;
@@ -558,130 +394,73 @@
       }
 
       try {
-        const fetchOptions = {
-          method: method,
-          headers: { 'Content-Type': 'application/json' }
-        };
+        const fetchOptions = { method: method, headers: { 'Content-Type': 'application/json' } };
         if (method === 'POST') fetchOptions.body = JSON.stringify(payload);
 
         const res = await fetch(endpoint, fetchOptions);
         const data = await res.json();
-
         resultArea.classList.remove('hidden-view');
 
         if (!data.success) {
-          resultArea.innerHTML = `
-            <div class="bg-red-500/10 border border-red-500/20 text-red-400 p-6 rounded-2xl text-center text-sm">
-              <i data-lucide="alert-triangle" class="w-6 h-6 mx-auto mb-2"></i>
-              Gagal memproses asset: ${data.message || 'Error pada server eksternal'}
-            </div>
-          `;
-          lucide.createIcons();
+          resultArea.innerHTML = `<div class="bg-red-500/10 border border-red-500/20 text-red-400 p-6 rounded-2xl text-center text-sm">${data.message || 'Error server.'}</div>`;
           return;
         }
 
-        // --- RENDER HASIL DENGAN GAYA NEXUS ROOM ---
         if (currentTool.id === 'quotes-today') {
-          const kata = data.data?.selected?.kata || '"Tetap semangat dan konsisten membangun hal hebat!"';
+          const kata = data.data?.selected?.kata || '"Tetap semangat dan konsisten!"';
           resultArea.innerHTML = `
             <div class="nexus-card rounded-3xl p-8 text-center space-y-4 nexus-border">
               <i data-lucide="quote" class="w-10 h-10 nexus-text mx-auto opacity-80"></i>
-              <p class="font-nexus text-xl font-bold text-white leading-relaxed tracking-wide">${kata}</p>
-              <span class="block text-xs font-semibold text-slate-400 uppercase tracking-widest">— NEXUS DAILY INSPIRATION</span>
+              <p class="font-nexus text-xl font-bold text-white leading-relaxed">${kata}</p>
+              <span class="block text-xs font-semibold text-slate-400 uppercase">— NEXUS DAILY INSPIRATION</span>
             </div>
           `;
         } else if (currentTool.id === 'yt-mp4') {
           const formats = data.data?.formats || [];
-          const optionsHtml = formats.map(f => `
-            <a href="${f.url}" target="_blank" class="nexus-btn px-5 py-2.5 rounded-xl text-xs font-bold text-white transition-all">
-              Download ${f.resolution || 'HD 1080p'}
-            </a>
-          `).join(' ');
-
+          const optionsHtml = formats.map(f => `<a href="${f.url}" target="_blank" class="nexus-btn px-5 py-2.5 rounded-xl text-xs font-bold text-white transition-all">Download ${f.resolution}</a>`).join(' ');
           resultArea.innerHTML = `
             <div class="nexus-card rounded-3xl p-6 sm:p-8 space-y-6 text-center">
-              <div class="space-y-1">
-                <span class="text-[10px] font-bold nexus-text tracking-widest uppercase">READY TO DOWNLOAD</span>
-                <h4 class="font-nexus font-bold text-lg text-white">${data.data?.title || 'YouTube Video HD'}</h4>
-              </div>
-              <p class="text-xs text-slate-400">Pilih resolusi video yang ingin disimpan ke perangkatmu:</p>
-              <div class="flex flex-wrap justify-center gap-3 pt-2">
-                ${optionsHtml || `<a href="${data.data?.download || '#'}" target="_blank" class="nexus-btn px-6 py-3 rounded-xl text-xs font-bold text-white">Download Video MP4</a>`}
-              </div>
+              <h4 class="font-nexus font-bold text-lg text-white">${data.data?.title || 'YouTube Video HD'}</h4>
+              <p class="text-xs text-slate-400">Pilih resolusi video yang ingin disimpan:</p>
+              <div class="flex flex-wrap justify-center gap-3 pt-2">${optionsHtml}</div>
             </div>
           `;
         } else if (currentTool.id === 'ngl-spam') {
-          resultArea.innerHTML = `
-            <div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 p-8 rounded-3xl text-center space-y-2">
-              <div class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-3">
-                <i data-lucide="check-circle-2" class="w-6 h-6 text-emerald-400"></i>
-              </div>
-              <h4 class="font-nexus font-bold text-lg">Spam NGL Berhasil Dikirim!</h4>
-              <p class="text-xs text-slate-400">Paket pesan anonim telah dikirimkan ke target server NGL.</p>
-            </div>
-          `;
+          resultArea.innerHTML = `<div class="bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 p-8 rounded-3xl text-center"><h4 class="font-bold text-lg">Spam NGL Berhasil Dikirim!</h4></div>`;
         } else if (['remove-bg', 'blur-foto', 'hd-foto', 'url-to-qr'].includes(currentTool.id)) {
-          const imgResultUrl = data.data?.hasilUrl || data.data?.qrUrl || data.data?.url || data.data?.image || '#';
+          const imgResultUrl = data.data?.hasilUrl || data.data?.qrUrl || data.data?.url || '#';
           resultArea.innerHTML = `
-            <div class="nexus-card rounded-3xl p-6 sm:p-8 space-y-6 text-center">
-              <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/80 p-4">
-                <img src="${imgResultUrl}" alt="Result Image" class="max-h-96 object-contain mx-auto rounded-xl" />
-              </div>
-              <a href="${imgResultUrl}" target="_blank" download="nexus_asset.png" class="inline-flex items-center gap-2 nexus-btn text-white font-bold text-xs px-6 py-3.5 rounded-xl transition-all">
-                <i data-lucide="download" class="w-4 h-4"></i> Simpan Gambar ke Perangkat
-              </a>
+            <div class="nexus-card rounded-3xl p-6 space-y-6 text-center">
+              <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/80 p-4"><img src="${imgResultUrl}" class="max-h-96 object-contain mx-auto rounded-xl" /></div>
+              <a href="${imgResultUrl}" target="_blank" download="nexus_asset.png" class="inline-flex items-center gap-2 nexus-btn text-white font-bold text-xs px-6 py-3.5 rounded-xl"><i data-lucide="download" class="w-4 h-4"></i> Simpan Gambar Hasil</a>
             </div>
           `;
         } else if (currentTool.category === 'Canvas Maker') {
           resultArea.innerHTML = `
-            <div class="nexus-card rounded-3xl p-6 sm:p-8 space-y-6 text-center">
-              <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/80">
-                <img src="${data.image}" alt="Canvas Render" class="w-full max-h-96 object-contain mx-auto" />
-              </div>
-              <a href="${data.image}" download="nexus_canvas.png" class="inline-flex items-center gap-2 nexus-btn text-white font-bold text-xs px-6 py-3.5 rounded-xl transition-all">
-                <i data-lucide="download" class="w-4 h-4"></i> Download Hasil Render Canvas
-              </a>
+            <div class="nexus-card rounded-3xl p-6 space-y-6 text-center">
+              <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950/80"><img src="${data.image}" class="w-full max-h-96 object-contain mx-auto" /></div>
+              <a href="${data.image}" download="nexus_canvas.png" class="inline-flex items-center gap-2 nexus-btn text-white font-bold text-xs px-6 py-3.5 rounded-xl"><i data-lucide="download" class="w-4 h-4"></i> Download Hasil Canvas</a>
             </div>
           `;
-        } else if (currentTool.category === 'AI & Tools' && (currentTool.inputType === 'chat' || currentTool.id === 'bot-feelbetter')) {
-          const msg = data.data?.message || data.message || 'Balasan diterima.';
-          resultArea.innerHTML = `
-            <div class="nexus-card rounded-3xl p-6 space-y-3">
-              <div class="flex items-center gap-2 text-xs font-bold nexus-text tracking-widest uppercase">
-                <i data-lucide="bot" class="w-4 h-4"></i> RESPONS NEXUS AI CORE:
-              </div>
-              <p class="text-slate-200 text-sm leading-relaxed whitespace-pre-line">${msg}</p>
-            </div>
-          `;
+        } else if (currentTool.category === 'AI & Tools' && currentTool.inputType === 'chat') {
+          resultArea.innerHTML = `<div class="nexus-card rounded-3xl p-6 space-y-3"><div class="text-xs font-bold nexus-text">RESPONS NEXUS AI CORE:</div><p class="text-slate-200 text-sm leading-relaxed">${data.data?.message || data.message}</p></div>`;
         } else {
-          // DEFAULT DOWNLOADERS / APK / SS WEB
-          const title = data.data?.title || data.data?.appName || `Asset Berhasil Diunduh (${currentTool.name})`;
-          const thumb = data.data?.thumbnail || data.data?.cover || data.data?.image || 'https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=600&auto=format&fit=crop';
-          const dlUrl = data.data?.download || data.data?.downloadUrl || data.data?.url || '#';
-
+          const title = data.data?.title || `Asset Ekstrak (${currentTool.name})`;
+          const thumb = data.data?.thumbnail || 'https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=600&auto=format&fit=crop';
+          const dlUrl = data.data?.download || '#';
           resultArea.innerHTML = `
             <div class="nexus-card rounded-3xl p-6 flex flex-col sm:flex-row gap-5 items-center">
-              <img src="${thumb}" alt="Thumb" class="w-28 h-28 object-cover rounded-2xl border border-slate-800 shrink-0" />
-              <div class="space-y-2 flex-1 text-center sm:text-left min-w-0">
-                <h4 class="font-nexus font-bold text-base text-white truncate">${title}</h4>
-                <p class="text-xs text-slate-400">Siap Diunduh • Resolusi & Audio Original</p>
-                <div class="pt-2 flex flex-wrap gap-2 justify-center sm:justify-start">
-                  <a href="${dlUrl}" target="_blank" class="inline-flex items-center gap-2 nexus-btn text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all">
-                    <i data-lucide="download" class="w-3.5 h-3.5"></i> Unduh File Sekarang
-                  </a>
-                </div>
+              <img src="${thumb}" class="w-28 h-28 object-cover rounded-2xl border border-slate-800 shrink-0" />
+              <div class="space-y-2 flex-1 text-center sm:text-left">
+                <h4 class="font-nexus font-bold text-base text-white">${title}</h4>
+                <a href="${dlUrl}" target="_blank" class="inline-flex items-center gap-2 nexus-btn text-white text-xs font-bold px-5 py-2.5 rounded-xl"><i data-lucide="download" class="w-3.5 h-3.5"></i> Unduh File Sekarang</a>
               </div>
             </div>
           `;
         }
       } catch (err) {
         resultArea.classList.remove('hidden-view');
-        resultArea.innerHTML = `
-          <div class="bg-red-500/10 border border-red-500/20 text-red-400 p-6 rounded-2xl text-center text-sm">
-            <i data-lucide="alert-triangle" class="w-6 h-6 mx-auto mb-2"></i>
-            Gagal menghubungkan ke server API: ${err.message}
-          </div>
-        `;
+        resultArea.innerHTML = `<div class="bg-red-500/10 border border-red-500/20 text-red-400 p-6 rounded-2xl text-center text-sm">${err.message}</div>`;
       } finally {
         btn.disabled = false;
         btn.innerHTML = '<i data-lucide="zap" class="w-4 h-4"></i> Proses & Ekstrak Asset';
@@ -689,7 +468,6 @@
       }
     }
 
-    // === 7. INISIALISASI PROTOTYPE ===
     renderCategories();
     renderTools();
   </script>
