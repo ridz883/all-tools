@@ -5,7 +5,7 @@ const downloaderService = require('../services/downloader.service');
 const aiService = require('../services/ai.service');
 const canvasService = require('../services/canvas.service');
 
-// Helper Wrapper untuk Menangani Error agar Serverless tidak Crash
+// Helper Wrapper
 const asyncHandler = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch((err) => {
     console.error(`[API Error]:`, err.message || err);
@@ -16,7 +16,9 @@ const asyncHandler = (fn) => (req, res, next) => {
   });
 };
 
-// --- DOWNLOADERS ---
+// ==========================================
+// 1. ROUTE DOWNLOADERS
+// ==========================================
 router.post('/downloader/tiktok', asyncHandler(async (req, res) => {
   const result = await downloaderService.tiktok(req.body.url);
   res.json({ success: true, data: result });
@@ -47,7 +49,9 @@ router.post('/downloader/spotify', asyncHandler(async (req, res) => {
   res.json({ success: true, data: result });
 }));
 
-// --- AI & UTILITY TOOLS ---
+// ==========================================
+// 2. ROUTE AI & UTILITIES (TERMASUK 5 TOOLS BARU)
+// ==========================================
 router.post('/ai/gpt-mini', asyncHandler(async (req, res) => {
   const message = await aiService.gptMini(req.body.prompt);
   res.json({ success: true, data: { message } });
@@ -78,7 +82,35 @@ router.post('/tools/web2apk', asyncHandler(async (req, res) => {
   res.json({ success: true, data: result });
 }));
 
-// --- CANVAS IMAGE MAKERS ---
+// --- 5 ROUTE TOOLS BARU ---
+router.post('/tools/remove-bg', asyncHandler(async (req, res) => {
+  const result = await aiService.removeBg(req.body.url);
+  res.json({ success: true, data: result });
+}));
+
+router.post('/tools/ngl-spam', asyncHandler(async (req, res) => {
+  const result = await aiService.spamNgl(req.body.url, req.body.jumlah, req.body.pesan);
+  res.json({ success: true, data: result });
+}));
+
+router.post('/tools/blur-foto', asyncHandler(async (req, res) => {
+  const result = await aiService.blurFoto(req.body.url, req.body.pixel);
+  res.json({ success: true, data: result });
+}));
+
+router.post('/tools/hd-foto', asyncHandler(async (req, res) => {
+  const result = await aiService.hdFoto(req.body.image || req.body.url);
+  res.json({ success: true, data: result });
+}));
+
+router.post('/tools/url-to-qr', asyncHandler(async (req, res) => {
+  const result = await aiService.urlToQr(req.body.url);
+  res.json({ success: true, data: result });
+}));
+
+// ==========================================
+// 3. ROUTE CANVAS IMAGE MAKERS
+// ==========================================
 router.post('/canvas/fake-applemusic', asyncHandler(async (req, res) => {
   const imageBase64 = await canvasService.fakeAppleMusic(req.body.title, req.body.artist);
   res.json({ success: true, image: imageBase64 });
