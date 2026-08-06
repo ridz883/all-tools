@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MultiTool.io - 16 All-in-One Tools</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body { background-color: #020617; color: #f8fafc; font-family: sans-serif; }
+    .hidden-view { display: none !important; }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 selection:bg-blue-500 selection:text-white">
+
+  <!-- Top Navigation -->
+  <header class="border-b border-slate-800/80 bg-slate-950/70 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div onclick="backToDashboard()" class="flex items-center gap-2.5 cursor-pointer">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold shadow-lg shadow-blue-500/20">
+          <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
+        </div>
+        <span class="font-bold text-lg tracking-tight">MultiTool<span class="text-blue-500">.io</span></span>
+      </div>
+      <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-400">
+        16 Tools Integrated
+      </span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-6 py-10">
+    
+    <!-- VIEW 1: DASHBOARD UTAMA -->
+    <div id="dashboardView" class="space-y-10">
+      <div class="text-center max-w-2xl mx-auto space-y-4">
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">
+          Koleksi Web Tools & AI <br />
+          <span class="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            Cepat, Modern & Praktis
+          </span>
+        </h1>
+        <p class="text-slate-400 text-sm sm:text-base">
+          Dari Downloader Sosial Media, Generator AI, hingga Pembuat Gambar Canvas custom dalam satu dashboard.
+        </p>
+
+        <!-- Search Bar -->
+        <div class="relative pt-2">
+          <i data-lucide="search" class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Cari tool (contoh: tiktok, gpt, apple music, free fire)..."
+            class="w-full bg-slate-900/90 border border-slate-800 rounded-2xl pl-12 pr-4 py-3.5 text-sm focus:outline-none focus:border-blue-500 transition-all placeholder:text-slate-500 shadow-xl"
+          />
+        </div>
+      </div>
+
+      <!-- Filter Kategori -->
+      <div id="categoryContainer" class="flex items-center justify-center gap-2 flex-wrap"></div>
+
+      <!-- Grid Katalog -->
+      <div id="toolsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </div>
+
+    <!-- VIEW 2: HALAMAN KHUSUS PER-TOOL -->
+    <div id="toolWorkspaceView" class="max-w-2xl mx-auto space-y-6 hidden-view">
+      <button
+        onclick="backToDashboard()"
+        class="inline-flex items-center gap-2 text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-900 border border-slate-800 px-3.5 py-2 rounded-xl transition-all cursor-pointer hover:border-slate-700"
+      >
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Kembali ke Daftar
+      </button>
+
+      <!-- Tool Workspace Card -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
+        <div class="space-y-1">
+          <span id="toolCategoryBadge" class="text-xs font-semibold text-blue-400 uppercase tracking-wider"></span>
+          <h2 id="toolTitle" class="text-2xl font-bold"></h2>
+          <p id="toolDesc" class="text-slate-400 text-sm"></p>
+        </div>
+
+        <!-- Form Input -->
+        <form id="toolForm" class="space-y-4" onsubmit="handleProcess(event)">
+          <div id="formInputArea"></div>
+        </form>
+
+        <!-- Area Hasil -->
+        <div id="toolResultArea" class="pt-6 border-t border-slate-800/80 hidden-view"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // === KATALOG 16 TOOLS ===
+    const TOOLS_CATALOG = [
+      { id: 'tiktok-dl', name: 'TikTok Downloader', category: 'Downloader', desc: 'Download video TikTok & slide foto tanpa watermark (HD).', icon: 'video', color: 'from-pink-500 to-rose-500', inputType: 'url', placeholder: 'https://vt.tiktok.com/...' },
+      { id: 'ig-dl', name: 'Instagram Downloader', category: 'Downloader', desc: 'Unduh Reels, Postingan foto, dan Carousel Instagram.', icon: 'camera', color: 'from-purple-500 to-pink-500', inputType: 'url', placeholder: 'https://www.instagram.com/reel/...' },
+      { id: 'pin-dl', name: 'Pinterest Downloader', category: 'Downloader', desc: 'Unduh foto resolusi tinggi & Carousel dari Pinterest.', icon: 'image', color: 'from-red-600 to-rose-600', inputType: 'url', placeholder: 'https://pin.it/...' },
+      { id: 'yt-mp4', name: 'YouTube Video (MP4)', category: 'Downloader', desc: 'Download video YouTube berkualitas tinggi HD 1080p.', icon: 'video', color: 'from-red-500 to-orange-500', inputType: 'url', placeholder: 'https://youtu.be/...' },
+      { id: 'yt-mp3', name: 'YouTube Audio (MP3)', category: 'Downloader', desc: 'Konversi dan unduh audio MP3 jernih (128kbps/320kbps).', icon: 'music', color: 'from-amber-500 to-red-500', inputType: 'url', placeholder: 'https://youtu.be/...' },
+      { id: 'spotify-dl', name: 'Spotify Downloader', category: 'Downloader', desc: 'Unduh lagu MP3 dari Spotify beserta cover album & metadata.', icon: 'music', color: 'from-emerald-500 to-green-600', inputType: 'url', placeholder: 'https://open.spotify.com/track/...' },
+      { id: 'gpt-mini', name: 'GPT-5.4 Mini AI', category: 'AI & Tools', desc: 'Chat cerdas dengan AI model terbaru tanpa perlu login.', icon: 'sparkles', color: 'from-blue-500 to-cyan-500', inputType: 'chat', placeholder: 'Tanyakan apa saja kepada AI...' },
+      { id: 'ai-img', name: 'AI Image Generator', category: 'AI & Tools', desc: 'Ubah teks prompt menjadi karya seni gambar berkualitas tinggi.', icon: 'palette', color: 'from-violet-500 to-purple-600', inputType: 'prompt', placeholder: 'Contoh: A futuristic cyberpunk city at rainy night, 4k...' },
+      { id: 'bot-feelbetter', name: 'FeelBetter AI Bot', category: 'AI & Tools', desc: 'Teman cerita AI yang siap mendengarkan dan memberi saran penenang.', icon: 'message-square', color: 'from-teal-500 to-emerald-500', inputType: 'chat', placeholder: 'Bagaimana perasaanmu hari ini? Ceritakan...' },
+      { id: 'web2apk', name: 'Web to APK Builder', category: 'AI & Tools', desc: 'Konversi website apapun menjadi aplikasi Android (.APK) instan.', icon: 'smartphone', color: 'from-indigo-500 to-blue-600', inputType: 'url', placeholder: 'https://website-kamu.com' },
+      { id: 'ss-web', name: 'FullPage Web Screenshot', category: 'AI & Tools', desc: 'Ambil tangkapan layar (screenshot) halaman web secara penuh dari atas ke bawah.', icon: 'terminal', color: 'from-cyan-500 to-blue-500', inputType: 'url', placeholder: 'https://example.com' },
+      { id: 'quotes-today', name: 'Kata-Kata Hari Ini', category: 'AI & Tools', desc: 'Dapatkan kutipan & kata-kata motivasi harian penambah semangat.', icon: 'quote', color: 'from-yellow-500 to-amber-600', inputType: 'button-only' },
+      { id: 'fake-applemusic', name: 'Fake Apple Music', category: 'Canvas Maker', desc: 'Buat gambar player Apple Music aesthetic dengan teks & lagu custom.', icon: 'music', color: 'from-rose-500 to-red-600', inputType: 'text', placeholder: 'Judul Lagu' },
+      { id: 'fake-ff', name: 'Fake FF Lobby Maker', category: 'Canvas Maker', desc: 'Generate gambar satpam lobby Free Fire dengan nama kerenmu.', icon: 'image', color: 'from-orange-500 to-amber-500', inputType: 'text', placeholder: 'Masukkan Nama Keren (contoh: RIDZ.GAKJAGO)' },
+      { id: 'fake-tulis', name: 'Fake Tulis Buku', category: 'Canvas Maker', desc: 'Ubah teks ketikan panjang menjadi gambar tulisan tangan di atas kertas.', icon: 'file-text', color: 'from-slate-500 to-zinc-600', inputType: 'textarea', placeholder: 'Ketik teks panjang yang ingin dijadikan tulisan tangan...' },
+      { id: 'fake-windows', name: 'Windows Player Maker', category: 'Canvas Maker', desc: 'Buat gambar aesthetic bertema Windows Media Player jadul.', icon: 'terminal', color: 'from-blue-600 to-indigo-600', inputType: 'text', placeholder: 'Masukkan teks custom kamu...' }
+    ];
+
+    const CATEGORIES = ['Semua', 'Downloader', 'AI & Tools', 'Canvas Maker'];
+    let activeCategory = 'Semua';
+    let searchQuery = '';
+    let currentTool = null;
+
+    // --- RENDER MENU KATEGORI ---
+    function renderCategories() {
+      const container = document.getElementById('categoryContainer');
+      container.innerHTML = CATEGORIES.map(cat => `
+        <button
+          onclick="setCategory('${cat}')"
+          class="px-4 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
+            activeCategory === cat
+              ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25 font-semibold'
+              : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800 hover:border-slate-700'
+          }"
+        >
+          ${cat}
+        </button>
+      `).join('');
+    }
+
+    // --- RENDER TOOLS GRID ---
+    function renderTools() {
+      const grid = document.getElementById('toolsGrid');
+      const filtered = TOOLS_CATALOG.filter(tool => {
+        const matchCat = activeCategory === 'Semua' || tool.category === activeCategory;
+        const matchSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                            tool.desc.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchCat && matchSearch;
+      });
+
+      grid.innerHTML = filtered.map(tool => `
+        <div
+          onclick="openTool('${tool.id}')"
+          class="group bg-slate-900/50 hover:bg-slate-900 border border-slate-800/80 hover:border-slate-700 rounded-2xl p-6 transition-all duration-200 cursor-pointer flex flex-col justify-between hover:shadow-xl hover:-translate-y-1"
+        >
+          <div class="space-y-4">
+            <div class="flex items-start justify-between">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-tr ${tool.color} flex items-center justify-center shadow-lg">
+                <i data-lucide="${tool.icon}" class="w-6 h-6 text-white"></i>
+              </div>
+              <span class="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-slate-800/80 text-slate-300 border border-slate-700/60">
+                ${tool.category}
+              </span>
+            </div>
+            <div>
+              <h3 class="font-semibold text-base text-slate-100 group-hover:text-blue-400 transition-colors">
+                ${tool.name}
+              </h3>
+              <p class="text-slate-400 text-xs mt-1.5 leading-relaxed line-clamp-2">
+                ${tool.desc}
+              </p>
+            </div>
+          </div>
+          <div class="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs font-medium text-slate-500 group-hover:text-slate-300">
+            <span>Gunakan Tool</span>
+            <span>&rarr;</span>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function setCategory(cat) {
+      activeCategory = cat;
+      renderCategories();
+      renderTools();
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderTools();
+    });
+
+    // --- BUKA WORKSPACE TOOL ---
+    function openTool(toolId) {
+      currentTool = TOOLS_CATALOG.find(t => t.id === toolId);
+      if (!currentTool) return;
+
+      document.getElementById('dashboardView').classList.add('hidden-view');
+      document.getElementById('toolWorkspaceView').classList.remove('hidden-view');
+      document.getElementById('toolResultArea').classList.add('hidden-view');
+
+      document.getElementById('toolCategoryBadge').textContent = currentTool.category;
+      document.getElementById('toolTitle').textContent = currentTool.name;
+      document.getElementById('toolDesc').textContent = currentTool.desc;
+
+      const formArea = document.getElementById('formInputArea');
+      if (currentTool.inputType === 'button-only') {
+        formArea.innerHTML = `
+          <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
+            <i data-lucide="refresh-cw" class="w-4 h-4"></i> Generate Kata Hari Ini
+          </button>
+        `;
+      } else if (currentTool.inputType === 'textarea') {
+        formArea.innerHTML = `
+          <div class="space-y-3">
+            <textarea id="toolInputVal" rows="4" required placeholder="${currentTool.placeholder}" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-sm focus:outline-none focus:border-blue-500 transition-all text-slate-200 placeholder:text-slate-600"></textarea>
+            <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-3 rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
+              Proses & Buat Gambar
+            </button>
+          </div>
+        `;
+      } else {
+        formArea.innerHTML = `
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input id="toolInputVal" type="text" required placeholder="${currentTool.placeholder}" class="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition-all text-slate-200 placeholder:text-slate-600" />
+            <button type="submit" id="submitBtn" class="bg-blue-600 hover:bg-blue-500 text-white font-medium px-6 py-3 rounded-xl text-sm flex items-center justify-center gap-2 transition-all cursor-pointer">
+              Proses
+            </button>
+          </div>
+        `;
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function backToDashboard() {
+      currentTool = null;
+      document.getElementById('toolWorkspaceView').classList.add('hidden-view');
+      document.getElementById('dashboardView').classList.remove('hidden-view');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- INTEGRASI PANGGILAN API KE BACKEND ---
+    async function handleProcess(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const inputEl = document.getElementById('toolInputVal');
+      const inputVal = inputEl ? inputEl.value : '';
+      const resultArea = document.getElementById('toolResultArea');
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="inline-block animate-spin">⌛</span> Processing...';
+      resultArea.classList.add('hidden-view');
+
+      // Mapping Endpoint API v1
+      let endpoint = '';
+      let payload = {};
+      let method = 'POST';
+
+      switch (currentTool.id) {
+        case 'tiktok-dl': endpoint = '/api/v1/downloader/tiktok'; payload = { url: inputVal }; break;
+        case 'ig-dl': endpoint = '/api/v1/downloader/ig'; payload = { url: inputVal }; break;
+        case 'pin-dl': endpoint = '/api/v1/downloader/pinterest'; payload = { url: inputVal }; break;
+        case 'yt-mp4': endpoint = '/api/v1/downloader/yt-mp4'; payload = { url: inputVal }; break;
+        case 'yt-mp3': endpoint = '/api/v1/downloader/yt-mp3'; payload = { url: inputVal }; break;
+        case 'spotify-dl': endpoint = '/api/v1/downloader/spotify'; payload = { url: inputVal }; break;
+        case 'gpt-mini': endpoint = '/api/v1/ai/gpt-mini'; payload = { prompt: inputVal }; break;
+        case 'bot-feelbetter': endpoint = '/api/v1/ai/feelbetter'; payload = { prompt: inputVal }; break;
+        case 'ai-img': endpoint = '/api/v1/ai/image-gen'; payload = { prompt: inputVal }; break;
+        case 'web2apk': endpoint = '/api/v1/tools/web2apk'; payload = { url: inputVal, appName: 'MyWebAPK' }; break;
+        case 'ss-web': endpoint = '/api/v1/tools/ss-web'; payload = { url: inputVal }; break;
+        case 'quotes-today': endpoint = '/api/v1/tools/kata-hari-ini'; method = 'GET'; break;
+        case 'fake-applemusic': endpoint = '/api/v1/canvas/fake-applemusic'; payload = { title: inputVal, artist: 'Custom Artist' }; break;
+        case 'fake-ff': endpoint = '/api/v1/canvas/fake-ff'; payload = { nama: inputVal }; break;
+        case 'fake-tulis': endpoint = '/api/v1/canvas/fake-tulis'; payload = { text: inputVal }; break;
+        case 'fake-windows': endpoint = '/api/v1/canvas/fake-windows'; payload = { text: inputVal }; break;
+      }
+
+      try {
+        const fetchOptions = {
+          method: method,
+          headers: { 'Content-Type': 'application/json' }
+        };
+        if (method === 'POST') fetchOptions.body = JSON.stringify(payload);
+
+        const res = await fetch(endpoint, fetchOptions);
+        const data = await res.json();
+
+        resultArea.classList.remove('hidden-view');
+
+        if (!data.success) {
+          resultArea.innerHTML = `
+            <div class="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-center text-sm">
+              Gagal memproses: ${data.message || 'Error pada server eksternal'}
+            </div>
+          `;
+          return;
+        }
+
+        // Tampilkan Hasil Berdasarkan Jenis Kategori Tool
+        if (currentTool.id === 'quotes-today') {
+          const kata = data.data?.selected?.kata || '"Tetap semangat dan konsisten!"';
+          resultArea.innerHTML = `
+            <div class="bg-gradient-to-r from-amber-500/10 to-yellow-500/10 border border-amber-500/20 p-6 rounded-2xl text-center space-y-3">
+              <p class="text-lg font-medium italic text-slate-200 leading-relaxed">${kata}</p>
+              <span class="block text-xs font-semibold text-amber-400">— Kata Hari Ini</span>
+            </div>
+          `;
+        } else if (currentTool.category === 'Canvas Maker') {
+          resultArea.innerHTML = `
+            <div class="space-y-4 text-center">
+              <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950">
+                <img src="${data.image}" alt="Canvas Render" class="w-full max-h-80 object-contain mx-auto" />
+              </div>
+              <a href="${data.image}" download="canvas_result.png" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs px-4 py-2.5 rounded-xl transition-all">
+                Download Gambar Canvas
+              </a>
+            </div>
+          `;
+        } else if (currentTool.category === 'AI & Tools' && (currentTool.inputType === 'chat' || currentTool.id === 'bot-feelbetter')) {
+          const msg = data.data?.message || data.message || 'Balasan diterima.';
+          resultArea.innerHTML = `
+            <div class="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl space-y-2">
+              <span class="text-xs font-semibold text-blue-400">Respons AI (${currentTool.name}):</span>
+              <p class="text-slate-300 text-sm leading-relaxed whitespace-pre-line">${msg}</p>
+            </div>
+          `;
+        } else {
+          // Downloader / Web Screenshot / APK Result display
+          const title = data.data?.title || data.data?.appName || `Berhasil Ekstrak (${currentTool.name})`;
+          const thumb = data.data?.thumbnail || data.data?.cover || data.data?.image || 'https://images.unsplash.com/photo-1611605698335-8b1569810432?q=80&w=600&auto=format&fit=crop';
+          const dlUrl = data.data?.download || data.data?.downloadUrl || data.data?.url || '#';
+
+          resultArea.innerHTML = `
+            <div class="flex flex-col sm:flex-row gap-4 items-center bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
+              <img src="${thumb}" alt="Thumb" class="w-24 h-24 object-cover rounded-xl border border-slate-800" />
+              <div class="space-y-1.5 flex-1 text-center sm:text-left min-w-0">
+                <h4 class="text-sm font-semibold text-slate-200 truncate">${title}</h4>
+                <p class="text-xs text-slate-400">Siap Diunduh • Kualitas Terbaik</p>
+                <div class="pt-2 flex flex-wrap gap-2 justify-center sm:justify-start">
+                  <a href="${dlUrl}" target="_blank" class="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-all">
+                    Unduh File Sekarang
+                  </a>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      } catch (err) {
+        resultArea.classList.remove('hidden-view');
+        resultArea.innerHTML = `
+          <div class="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-center text-sm">
+            Gagal menghubungkan ke server API: ${err.message}
+          </div>
+        `;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = 'Proses Selesai!';
+      }
+    }
+
+    // --- INIT PROTOTYPE ---
+    renderCategories();
+    renderTools();
+  </script>
+</body>
+</html>
